@@ -38,7 +38,19 @@ export default function (state = initialState, action) {
     case CHANGESTATE:
       const courses = Object.assign({}, state.get('fixture'));
 
+      // set new state to the course
       courses[action.payload.code].state = action.payload.state;
+
+      let course;
+      Object.keys(courses).forEach(courseCode => {
+        course = courses[courseCode];
+
+        course.dependencies.forEach(dep => {
+          if (dep.code === action.payload.code) {
+            dep.crossed = (dep.type === 'S' && (dep.state === 'A' || dep.state === 'S')) || (dep.type === 'A' && dep.state === 'A');
+          }
+        });
+      });
 
       return state
         .set('fixture', courses)
