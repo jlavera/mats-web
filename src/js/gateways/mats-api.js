@@ -1,7 +1,8 @@
 import bluebird       from 'bluebird';
 import { superagent } from '../utils'
 
-const apiAddress = 'http://localhost:8080/api/v1';
+// const apiAddress = `${process.env.APIADDRESS ? process.env.APIADDRESS : 'http://localhost:8080'}/api/v1`;
+const apiAddress = `/api/v1`;
 
 module.exports = {
   getCareers: () => {

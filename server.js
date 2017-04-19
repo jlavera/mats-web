@@ -17,8 +17,8 @@ app.use(express.static(path.join(__dirname, 'dist')));
 var request = require('request');
 
 app.use('/api/v1', function(req, res) {
-  console.log(req.url);
-  var url = 'http://0.0.0.0:8088/api/v1/' + req.url;
+  const url = `${process.env.APIADDRESS ? process.env.APIADDRESS : 'http://localhost:8088'}/api/v1/${req.url}`;
+
   req.pipe(request(url)).pipe(res);
 });
 
