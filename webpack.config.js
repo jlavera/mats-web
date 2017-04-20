@@ -25,8 +25,26 @@ module.exports = {
       ]
     }, {
       test: /.*/,
-      use: 'file-loader?name=static/[name].[ext]',
-      exclude: /npm\.js/,
+      use: 'file-loader?name=static/[ext]/[name].[ext]',
+      exclude: [
+        /npm\.js/,
+        /.eot/,
+        /.svg/,
+        /.ttf/,
+        /.woff/,
+        /.woff2/,
+      ],
+      include: [
+        path.resolve(__dirname, "src/static")
+      ]
+    }, {
+      test: /.*/,
+      use: 'file-loader?name=static/fonts/[name].[ext]',
+      exclude: [
+        /npm\.js/,
+        /.js/,
+        /.css/
+      ],
       include: [
         path.resolve(__dirname, "src/static")
       ]

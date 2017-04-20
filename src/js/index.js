@@ -16,6 +16,12 @@ require('../css/general.styl');
 
 require('../static/bootstrap/css/bootswatch.min.css');
 require('../static/bootstrap/js/bootstrap.min.js');
+require('../static/bootstrap/js/jquery-3.2.1.min.js');
+require('../static/bootstrap/fonts/glyphicons-halflings-regular.eot');
+require('../static/bootstrap/fonts/glyphicons-halflings-regular.svg');
+require('../static/bootstrap/fonts/glyphicons-halflings-regular.ttf');
+require('../static/bootstrap/fonts/glyphicons-halflings-regular.woff');
+require('../static/bootstrap/fonts/glyphicons-halflings-regular.woff2');
 
 const store  = createStore(
     allReducers,

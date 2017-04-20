@@ -41,7 +41,7 @@ class CoursesList extends Component {
 };
 
 function groupByYear(courses) {
-  const groups = [];
+  let groups = [];
 
   let course;
   Object.keys(courses).forEach(courseCode => {
@@ -52,7 +52,9 @@ function groupByYear(courses) {
     }
 
     groups[course.year].push(course);
-  })
+  });
+
+  // groups = groups.sort((dep1, dep2) => dep1.name < dep2.name ? 1 : -1);
 
   // remove year 0
   return groups.slice(1);

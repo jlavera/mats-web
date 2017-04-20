@@ -43,9 +43,9 @@ export const doGetCoursesForCareer = (careerCode) => {
     dispatch(coursesListRequest());
 
     return Promise.all([
-      apiGateway.getCoursesByCareer(careerCode),
-      apiGateway.getTreeByCareer(careerCode)
-    ])
+        apiGateway.getCoursesByCareer(careerCode),
+        apiGateway.getTreeByCareer(careerCode)
+      ])
       .then(responses => {
         let [courses, tree] = responses.map(byCode);
 
@@ -55,6 +55,7 @@ export const doGetCoursesForCareer = (careerCode) => {
           leaf = tree[leafKey];
 
           leaf.dependencies = leaf.dependencies.map(dep => Object.assign(courses[dep.code], dep));
+          // leaf.dependencies.sort((dep1, dep2) => dep1.type < dep2.type ? 1 : -1);
         });
 
         // hydrate courses with it's dependencies

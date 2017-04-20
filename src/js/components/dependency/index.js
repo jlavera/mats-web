@@ -7,7 +7,7 @@ class Dependency extends Component {
 
   render() {
     return (
-      <div className={this.props.course.crossed ? 'crossed' : ''}>
+      <div className={(this.props.course.crossed ? 'crossed' : '') + " dependency"}>
         &nbsp;&nbsp;&nbsp;&nbsp;[{this.props.course.type === 'S' ? 'F' : 'A'}] {this.props.course.name}
       </div>
     );
