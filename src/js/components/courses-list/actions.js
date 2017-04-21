@@ -54,7 +54,7 @@ export const doGetCoursesForCareer = (careerCode) => {
         Object.keys(tree).forEach(leafKey => {
           leaf = tree[leafKey];
 
-          leaf.dependencies = leaf.dependencies.map(dep => Object.assign(courses[dep.code], dep));
+          leaf.dependencies = leaf.dependencies.map(dep => Object.assign({}, courses[dep.code], dep));
           // leaf.dependencies.sort((dep1, dep2) => dep1.type < dep2.type ? 1 : -1);
         });
 

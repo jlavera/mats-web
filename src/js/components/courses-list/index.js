@@ -2,7 +2,7 @@ import React, { Component }   from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 
-import { coursesList }           from './reducer';
+import { coursesList }        from './reducer';
 import {
   doGetCoursesForCareer,
   doChangeStateCourse
@@ -79,4 +79,4 @@ function mapDispatchToProps(dispatch){
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoursesList)
+export default connect(mapStateToProps, mapDispatchToProps)(CoursesList);

@@ -36,7 +36,8 @@ export default function (state = initialState, action) {
         .set('error',      action.payload.error)
       ;
     case CHANGESTATE:
-      const courses = Object.assign({}, state.get('fixture'));
+      const courses       = Object.assign({}, state.get('fixture'));
+      const changedCourse = courses[action.payload.code];
 
       // set new state to the course
       courses[action.payload.code].state = action.payload.state;
@@ -47,7 +48,8 @@ export default function (state = initialState, action) {
 
         course.dependencies.forEach(dep => {
           if (dep.code === action.payload.code) {
-            dep.crossed = (dep.type === 'S' && (dep.state === 'A' || dep.state === 'S')) || (dep.type === 'A' && dep.state === 'A');
+            // debugger;
+            dep.crossed = (dep.type === 'S' && (changedCourse.state === 'A' || changedCourse.state === 'S')) || (dep.type === 'A' && changedCourse.state === 'A');
           }
         });
       });
