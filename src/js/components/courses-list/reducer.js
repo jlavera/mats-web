@@ -46,9 +46,8 @@ export default function (state = initialState, action) {
       Object.keys(courses).forEach(courseCode => {
         course = courses[courseCode];
 
-        course.dependencies.forEach(dep => {
+        (course.dependencies.toSign.concat(course.dependencies.toApprove)).forEach(dep => {
           if (dep.code === action.payload.code) {
-            // debugger;
             dep.crossed = (dep.type === 'S' && (changedCourse.state === 'A' || changedCourse.state === 'S')) || (dep.type === 'A' && changedCourse.state === 'A');
           }
         });

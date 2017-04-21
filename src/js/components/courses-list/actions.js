@@ -51,11 +51,15 @@ export const doGetCoursesForCareer = (careerCode) => {
 
         // hydrate dependency with full course entity
         let leaf;
+        let dependencies;
         Object.keys(tree).forEach(leafKey => {
           leaf = tree[leafKey];
 
-          leaf.dependencies = leaf.dependencies.map(dep => Object.assign({}, courses[dep.code], dep));
-          // leaf.dependencies.sort((dep1, dep2) => dep1.type < dep2.type ? 1 : -1);
+          dependencies      = leaf.dependencies.map(dep => Object.assign({}, courses[dep.code], dep));
+          leaf.dependencies = {
+            toSign:    dependencies.filter(dep => dep.type === 'S'),
+            toApprove: dependencies.filter(dep => dep.type === 'A')
+          };
         });
 
         // hydrate courses with it's dependencies
@@ -63,7 +67,7 @@ export const doGetCoursesForCareer = (careerCode) => {
         Object.keys(courses).forEach(courseKey => {
           course = courses[courseKey];
 
-          Object.assign(course, tree[course.code] || {dependencies: []});
+          Object.assign(course, tree[course.code] || {dependencies: {toSign: [], toApprove: []}});
         });
 
         dispatch(coursesListSuccess(careerCode, courses));

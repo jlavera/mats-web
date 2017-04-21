@@ -7,6 +7,8 @@ class Course extends Component {
     super(props);
 
     this.isBlocked        = this.isBlocked.bind(this);
+    this.hasDepsToSign    = this.hasDepsToSign.bind(this);
+    this.hasDepsToApprove = this.hasDepsToApprove.bind(this);
     this.hasDeppendencies = this.hasDeppendencies.bind(this);
 
     this.isNone           = this.isNone.bind(this);
@@ -15,11 +17,19 @@ class Course extends Component {
   }
 
   isBlocked() {
-    return this.props.course.dependencies.some(dep => !dep.crossed);
+    return (this.props.course.dependencies.toSign.concat(this.props.course.dependencies.toApprove)).some(dep => !dep.crossed);
+  }
+
+  hasDepsToSign() {
+    return !!this.props.course.dependencies.toSign.length;
+  }
+
+  hasDepsToApprove() {
+    return !!this.props.course.dependencies.toApprove.length;
   }
 
   hasDeppendencies() {
-    return !!this.props.course.dependencies.length;
+    return this.hasDepsToSign() || this.hasDepsToApprove();
   }
 
   isNone() {
@@ -51,10 +61,15 @@ class Course extends Component {
 
           <div className="separator"></div>
 
-          {this.hasDeppendencies() ? <hr className="course-separator" /> : ''}
 
           <div id={"deps-" + this.props.course.code} className="collapse">
-            {this.props.course.dependencies.map((dep, index) => <Dependency key={'' + dep.code + index} course={dep}/>)}
+            {this.hasDepsToSign() ? <hr className="course-separator" /> : ''}
+
+            {this.props.course.dependencies.toSign.filter(dep => dep.type === 'S').map((dep, index) => <Dependency key={'' + dep.code + index} course={dep}/>)}
+
+            {this.hasDepsToApprove() ? <hr className="course-separator" /> : ''}
+
+            {this.props.course.dependencies.toApprove.filter(dep => dep.type === 'A').map((dep, index) => <Dependency key={'' + dep.code + index} course={dep}/>)}
           </div>
         </div>
         <div className="panel-footer">

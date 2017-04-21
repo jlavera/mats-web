@@ -30,7 +30,7 @@ class CoursesList extends Component {
       <div>
         <h2>Materias:</h2>
 
-        <div>
+        <div className="flexcontainer row center">
           {this.props.list.map((courses, index) =>
             <Year key={index} year={index + 1} courses={courses} onChangeState={this.props.fs.doChangeStateCourse} />
           )}
