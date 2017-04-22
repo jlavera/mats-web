@@ -65,11 +65,11 @@ class Course extends Component {
           <div id={"deps-" + this.props.course.code} className="collapse">
             {this.hasDepsToSign() ? <hr className="course-separator" /> : ''}
 
-            {this.props.course.dependencies.toSign.filter(dep => dep.type === 'S').map((dep, index) => <Dependency key={'' + dep.code + index} course={dep}/>)}
+            {this.props.course.dependencies.toSign.filter(dep => dep.type === 'S').map((dep, index) => <Dependency key={'' + dep.course.code + index} course={dep}/>)}
 
             {this.hasDepsToApprove() ? <hr className="course-separator" /> : ''}
 
-            {this.props.course.dependencies.toApprove.filter(dep => dep.type === 'A').map((dep, index) => <Dependency key={'' + dep.code + index} course={dep}/>)}
+            {this.props.course.dependencies.toApprove.filter(dep => dep.type === 'A').map((dep, index) => <Dependency key={'' + dep.course.code + index} course={dep}/>)}
           </div>
         </div>
         <div className="panel-footer">

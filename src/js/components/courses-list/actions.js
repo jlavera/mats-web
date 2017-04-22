@@ -55,7 +55,11 @@ export const doGetCoursesForCareer = (careerCode) => {
         Object.keys(tree).forEach(leafKey => {
           leaf = tree[leafKey];
 
-          dependencies      = leaf.dependencies.map(dep => Object.assign({}, courses[dep.code], dep));
+          dependencies      = leaf.dependencies.map(dep => ({
+            type:   dep.type,
+            course: courses[dep.code]
+          }));
+            // Object.assign({}, courses[dep.code], dep));
           leaf.dependencies = {
             toSign:    dependencies.filter(dep => dep.type === 'S'),
             toApprove: dependencies.filter(dep => dep.type === 'A')
@@ -71,6 +75,7 @@ export const doGetCoursesForCareer = (careerCode) => {
         });
 
         dispatch(coursesListSuccess(careerCode, courses));
+        dispatch(setInitialState(JSON.parse(localStorage.getItem('localState'))));
       })
       .catch(error => {
         dispatch(coursesListError(error.message));
@@ -95,4 +100,15 @@ export const doChangeStateCourse = (state, courseCode) => {
   return function (dispatch) {
     dispatch(changeState(state, courseCode));
   }
+}
+
+export const SETINITIALSTATE = 'SETINITIALSTATE';
+
+const setInitialState = (list) => {
+  return {
+    type: SETINITIALSTATE,
+    payload: {
+      list
+    }
+  };
 }
