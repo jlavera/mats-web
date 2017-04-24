@@ -48,7 +48,7 @@ class Course extends Component {
 
   render() {
     return (
-      <div className={(this.isBlocked() ? 'panel-warning' : 'panel-info') + " panel"}>
+      <div className={(this.isBlocked() ? 'panel-warning' : this.isApproved() ? 'panel-success' : 'panel-info') + " panel"}>
         <div className="panel-heading">
           <div className={(this.props.course.main ? "underlined" : "" ) + " course-name panel-title"}>{this.props.course.name}</div>
 
