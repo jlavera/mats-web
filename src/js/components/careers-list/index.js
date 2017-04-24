@@ -26,9 +26,7 @@ class CareersList extends Component {
 
     return (
       <div>
-        <h2>Carreras:</h2>
-
-        <div>
+        <div className="flexcontainer">
           {this.props.list.map(career => (
             <Career key={career.code} career={career} onClick={() => this.props.fs.doSelectCareer(career.code)} selected={this.props.selected}/>
           ))}

@@ -73,9 +73,9 @@ class Course extends Component {
           </div>
         </div>
         <div className="panel-footer">
-          <div className={(this.isNone()     ? 'active' : '') + " btn btn-default col-xs-4"} onClick={() => this.props.onChangeState('N', this.props.course.code)}> N </div>
-          <div className={(this.isSigned()   ? 'active' : '') + " btn btn-default col-xs-4"} onClick={() => this.props.onChangeState('S', this.props.course.code)}> F </div>
-          <div className={(this.isApproved() ? 'active' : '') + " btn btn-default col-xs-4"} onClick={() => this.props.onChangeState('A', this.props.course.code)}> A </div>
+          <div className={(this.isNone()     ? 'active' : '') + " btn btn-default btn-xs col-xs-4"} onClick={() => this.props.onChangeState('N', this.props.course.code)}> N </div>
+          <div className={(this.isSigned()   ? 'active' : '') + " btn btn-default btn-xs col-xs-4"} onClick={() => this.props.onChangeState('S', this.props.course.code)}> F </div>
+          <div className={(this.isApproved() ? 'active' : '') + " btn btn-default btn-xs col-xs-4"} onClick={() => this.props.onChangeState('A', this.props.course.code)}> A </div>
           <div className="separator"></div>
         </div>
       </div>

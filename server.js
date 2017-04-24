@@ -22,6 +22,13 @@ app.use('/api/v1', function(req, res) {
   req.pipe(request(url)).pipe(res);
 });
 
+app.use('/public', function(req, res) {
+  const url = `${process.env.APIADDRESS ? process.env.APIADDRESS : 'http://localhost:8088'}/public/${req.url}`;
+  console.log(url);
+
+  req.pipe(request(url)).pipe(res);
+});
+
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/dist/index.html')
 });
