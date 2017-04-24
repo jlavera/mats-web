@@ -29,6 +29,12 @@ app.use('/public', function(req, res) {
   req.pipe(request(url)).pipe(res);
 });
 
+app.use('/favicon.ico', function(req, res) {
+  const url = process.env.APIADDRESS ? process.env.APIADDRESS : 'http://localhost:8088/favicon.ico';
+
+  req.pipe(request(url)).pipe(res);
+});
+
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/dist/index.html')
 });
