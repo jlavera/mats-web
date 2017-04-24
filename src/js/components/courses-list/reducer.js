@@ -1,4 +1,5 @@
-import { fromJS } from 'immutable';
+import stateStorage from '../../services/stateStorage';
+import { fromJS }   from 'immutable';
 
 import {
   COURSESLIST_REQUEST,
@@ -58,21 +59,7 @@ export default function (state = initialState, action) {
 
       updateCoursesAvailability(courses);
 
-      const localState = JSON.parse(localStorage.getItem('localState')) || [];
-
-      let present      = false;
-      localState.forEach(localCourse => {
-        if (!present && localCourse.code === changedCourse.code) {
-          localCourse.state = changedCourse.state;
-          present = true;
-        }
-      });
-
-      if (!present) {
-        localState.push({code: changedCourse.code, state: changedCourse.state});
-      }
-
-      localStorage.setItem('localState', JSON.stringify(localState));
+      stateStorage.set(changedCourse);
 
       return state
         .set('fixture', courses)

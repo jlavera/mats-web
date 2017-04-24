@@ -1,4 +1,5 @@
-import apiGateway from '../../gateways/mats-api';
+import stateStorage from '../../services/stateStorage';
+import apiGateway   from '../../gateways/mats-api';
 
 export const COURSESLIST_REQUEST = 'COURSESLIST_REQUEST';
 export const COURSESLIST_SUCCESS = 'COURSESLIST_SUCCESS';
@@ -75,7 +76,7 @@ export const doGetCoursesForCareer = (careerCode) => {
         });
 
         dispatch(coursesListSuccess(careerCode, courses));
-        dispatch(setInitialState(JSON.parse(localStorage.getItem('localState'))));
+        dispatch(setInitialState(stateStorage.get()));
       })
       .catch(error => {
         dispatch(coursesListError(error.message));
