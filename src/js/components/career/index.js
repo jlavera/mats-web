@@ -2,6 +2,8 @@ import React, { Component }   from 'react'
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 
+require('./style.styl');
+
 class Career extends Component {
   constructor(props) {
     super(props);

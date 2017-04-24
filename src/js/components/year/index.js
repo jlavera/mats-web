@@ -2,6 +2,8 @@ import React, { Component }   from 'react'
 
 import Course from '../course';
 
+require('./style.styl');
+
 class Year extends Component {
   constructor(props) {
     super(props);
