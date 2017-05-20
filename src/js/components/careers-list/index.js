@@ -10,6 +10,8 @@ import {
 
 import Career from '../career';
 
+require('./style.styl');
+
 class CareersList extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,7 @@ class CareersList extends Component {
 
     return (
       <div>
-        <div className="flexcontainer">
+        <div className="flexcontainervertical careers-list">
           {this.props.list.map(career => (
             <Career key={career.code} career={career} onClick={() => this.props.fs.doSelectCareer(career.code)} selected={this.props.selected}/>
           ))}
