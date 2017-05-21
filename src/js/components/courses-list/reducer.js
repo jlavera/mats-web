@@ -46,9 +46,9 @@ export default function (state = initialState, action) {
       (action.payload.list || []).forEach(course => {
         courses[course.code].state = course.state;
 
+        updateCoursesAvailability(courses[course.code].dependents);
       });
 
-      updateCoursesAvailability(action.payload.list || []);
 
       return state
         .set('fixture', courses)

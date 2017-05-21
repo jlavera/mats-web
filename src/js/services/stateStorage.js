@@ -1,10 +1,18 @@
+const storageVersion = 'mats-web-1';
+
 module.exports = {
   get,
   set
 }
 
 function get() {
-  return JSON.parse(localStorage.getItem('localState')) || [];
+  const localState = JSON.parse(localStorage.getItem(storageVersion));
+
+  if (!localState) {
+    return [];
+  }
+
+  return localState.localState || [];
 }
 
 function set(course) {
@@ -22,5 +30,7 @@ function set(course) {
     localState.push({code: course.code, state: course.state});
   }
 
-  localStorage.setItem('localState', JSON.stringify(localState));
+  const stateToStore = JSON.stringify({localState: localState});
+
+  localStorage.setItem(storageVersion, stateToStore);
 }
