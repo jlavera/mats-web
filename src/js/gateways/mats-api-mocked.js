@@ -903,5 +903,411 @@ module.exports = {
         }
       ]
     }
-  ])}
+  ])},
+
+  getReverseTreeByCareer: () => {
+    return bluebird.resolve([{
+      "code": "950309",
+      "dependents": [{
+        "type": "A",
+        "code": "082037"
+      }, {
+        "type": "A",
+        "code": "082039"
+      }, {
+        "type": "A",
+        "code": "082035"
+      }, {
+        "type": "S",
+        "code": "082033"
+      }]
+    }, {
+      "code": "950606",
+      "dependents": [{
+        "type": "A",
+        "code": "082031"
+      }, {
+        "type": "A",
+        "code": "082036"
+      }, {
+        "type": "S",
+        "code": "082029"
+      }]
+    }, {
+      "code": "082030",
+      "dependents": [{
+        "type": "A",
+        "code": "082037"
+      }, {
+        "type": "S",
+        "code": "082038"
+      }]
+    }, {
+      "code": "082024",
+      "dependents": [{
+        "type": "A",
+        "code": "082033"
+      }, {
+        "type": "A",
+        "code": "082038"
+      }, {
+        "type": "S",
+        "code": "082030"
+      }, {
+        "type": "S",
+        "code": "950310"
+      }, {
+        "type": "S",
+        "code": "950309"
+      }, {
+        "type": "S",
+        "code": "082028"
+      }]
+    }, {
+      "code": "082027",
+      "dependents": [{
+        "type": "A",
+        "code": "082037"
+      }, {
+        "type": "A",
+        "code": "082035"
+      }, {
+        "type": "S",
+        "code": "082031"
+      }, {
+        "type": "A",
+        "code": "082039"
+      }, {
+        "type": "S",
+        "code": "082033"
+      }]
+    }, {
+      "code": "950702",
+      "dependents": [{
+        "type": "A",
+        "code": "082032"
+      }, {
+        "type": "A",
+        "code": "082029"
+      }, {
+        "type": "S",
+        "code": "950703"
+      }, {
+        "type": "S",
+        "code": "950704"
+      }]
+    }, {
+      "code": "082033",
+      "dependents": [{
+        "type": "S",
+        "code": "082037"
+      }, {
+        "type": "S",
+        "code": "082035"
+      }, {
+        "type": "S",
+        "code": "082039"
+      }]
+    }, {
+      "code": "082021",
+      "dependents": [{
+        "type": "A",
+        "code": "950310"
+      }, {
+        "type": "S",
+        "code": "082025"
+      }, {
+        "type": "A",
+        "code": "082031"
+      }, {
+        "type": "A",
+        "code": "082030"
+      }, {
+        "type": "A",
+        "code": "082028"
+      }, {
+        "type": "S",
+        "code": "082026"
+      }, {
+        "type": "S",
+        "code": "082024"
+      }, {
+        "type": "A",
+        "code": "950309"
+      }, {
+        "type": "S",
+        "code": "082027"
+      }]
+    }, {
+      "code": "951601",
+      "dependents": [{
+        "type": "A",
+        "code": "082037"
+      }]
+    }, {
+      "code": "951604",
+      "dependents": [{
+        "type": "A",
+        "code": "082037"
+      }, {
+        "type": "S",
+        "code": "950310"
+      }]
+    }, {
+      "code": "082029",
+      "dependents": [{
+        "type": "A",
+        "code": "082037"
+      }, {
+        "type": "S",
+        "code": "082031"
+      }]
+    }, {
+      "code": "950704",
+      "dependents": [{
+        "type": "A",
+        "code": "082037"
+      }, {
+        "type": "A",
+        "code": "082035"
+      }, {
+        "type": "A",
+        "code": "082039"
+      }, {
+        "type": "A",
+        "code": "082040"
+      }, {
+        "type": "S",
+        "code": "082034"
+      }, {
+        "type": "S",
+        "code": "082041"
+      }, {
+        "type": "S",
+        "code": "082038"
+      }]
+    }, {
+      "code": "082041",
+      "dependents": [{
+        "type": "S",
+        "code": "082035"
+      }, {
+        "type": "S",
+        "code": "082040"
+      }]
+    }, {
+      "code": "082020",
+      "dependents": [{
+        "type": "A",
+        "code": "082030"
+      }, {
+        "type": "A",
+        "code": "082031"
+      }, {
+        "type": "S",
+        "code": "082026"
+      }, {
+        "type": "S",
+        "code": "082025"
+      }, {
+        "type": "A",
+        "code": "082028"
+      }, {
+        "type": "S",
+        "code": "082036"
+      }]
+    }, {
+      "code": "950605",
+      "dependents": [{
+        "type": "A",
+        "code": "082029"
+      }, {
+        "type": "S",
+        "code": "950606"
+      }]
+    }, {
+      "code": "082023",
+      "dependents": [{
+        "type": "A",
+        "code": "082028"
+      }, {
+        "type": "A",
+        "code": "082030"
+      }, {
+        "type": "A",
+        "code": "950310"
+      }, {
+        "type": "S",
+        "code": "082024"
+      }, {
+        "type": "A",
+        "code": "950309"
+      }, {
+        "type": "S",
+        "code": "082027"
+      }]
+    }, {
+      "code": "082038",
+      "dependents": [{
+        "type": "S",
+        "code": "082037"
+      }]
+    }, {
+      "code": "095070",
+      "dependents": [{
+        "type": "A",
+        "code": "082032"
+      }, {
+        "type": "A",
+        "code": "082029"
+      }, {
+        "type": "S",
+        "code": "950703"
+      }, {
+        "type": "S",
+        "code": "950606"
+      }, {
+        "type": "S",
+        "code": "950704"
+      }]
+    }, {
+      "code": "082026",
+      "dependents": [{
+        "type": "A",
+        "code": "082038"
+      }, {
+        "type": "A",
+        "code": "082033"
+      }, {
+        "type": "S",
+        "code": "082030"
+      }, {
+        "type": "S",
+        "code": "082028"
+      }]
+    }, {
+      "code": "082032",
+      "dependents": [{
+        "type": "A",
+        "code": "082039"
+      }, {
+        "type": "A",
+        "code": "082035"
+      }, {
+        "type": "S",
+        "code": "082034"
+      }, {
+        "type": "S",
+        "code": "082041"
+      }, {
+        "type": "A",
+        "code": "082040"
+      }]
+    }, {
+      "code": "081420",
+      "dependents": [{
+        "type": "S",
+        "code": "082036"
+      }]
+    }, {
+      "code": "951603",
+      "dependents": [{
+        "type": "A",
+        "code": "082037"
+      }]
+    }, {
+      "code": "950310",
+      "dependents": [{
+        "type": "S",
+        "code": "082037"
+      }]
+    }, {
+      "code": "082031",
+      "dependents": [{
+        "type": "S",
+        "code": "082037"
+      }]
+    }, {
+      "code": "082028",
+      "dependents": [{
+        "type": "A",
+        "code": "082037"
+      }, {
+        "type": "A",
+        "code": "082039"
+      }, {
+        "type": "A",
+        "code": "082035"
+      }, {
+        "type": "A",
+        "code": "082040"
+      }, {
+        "type": "S",
+        "code": "082033"
+      }, {
+        "type": "S",
+        "code": "082038"
+      }]
+    }, {
+      "code": "082034",
+      "dependents": [{
+        "type": "S",
+        "code": "082035"
+      }, {
+        "type": "S",
+        "code": "082039"
+      }]
+    }, {
+      "code": "950703",
+      "dependents": [{
+        "type": "A",
+        "code": "082031"
+      }, {
+        "type": "A",
+        "code": "082036"
+      }, {
+        "type": "A",
+        "code": "082034"
+      }, {
+        "type": "A",
+        "code": "082041"
+      }, {
+        "type": "S",
+        "code": "082032"
+      }, {
+        "type": "S",
+        "code": "082029"
+      }]
+    }, {
+      "code": "951602",
+      "dependents": [{
+        "type": "A",
+        "code": "082033"
+      }, {
+        "type": "A",
+        "code": "951603"
+      }]
+    }, {
+      "code": "082022",
+      "dependents": [{
+        "type": "A",
+        "code": "082031"
+      }, {
+        "type": "A",
+        "code": "082033"
+      }, {
+        "type": "S",
+        "code": "082029"
+      }]
+    }, {
+      "code": "082025",
+      "dependents": [{
+        "type": "A",
+        "code": "082038"
+      }, {
+        "type": "S",
+        "code": "082030"
+      }]
+    }])
+  }
 };

@@ -27,5 +27,13 @@ module.exports = {
       .then(response => response)
       .get('body')
     ;
+  },
+
+  getReverseTreeByCareer: (careerCode) => {
+    return superagent.get(`${apiAddress}/careers/${careerCode}/reverseTree`)
+      .set('Content-Type', 'application/json')
+      .then(response => response)
+      .get('body')
+    ;
   }
 };

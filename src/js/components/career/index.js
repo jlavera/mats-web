@@ -13,7 +13,6 @@ class Career extends Component {
     return (
       <div className="career" onClick={this.props.onClick}>
         <img className={(this.props.selected === this.props.career.code ?  "selected" : "") + " career-image"} src={`/public/images/${this.props.career.code}.png`} />
-         {/*<div className="career-code">{this.props.career.code}</div> {this.props.career.name} { this.props.selected === this.props.career.code ? '*' : ''} */}
       </div>
     );
   }

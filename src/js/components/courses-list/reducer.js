@@ -43,9 +43,12 @@ export default function (state = initialState, action) {
       courses              = Object.assign({}, state.get('fixture'));
 
       // set new state to the courses
-      (action.payload.list || []).forEach(course => courses[course.code].state = course.state);
+      (action.payload.list || []).forEach(course => {
+        courses[course.code].state = course.state;
 
-      updateCoursesAvailability(courses);
+      });
+
+      updateCoursesAvailability(action.payload.list || []);
 
       return state
         .set('fixture', courses)
@@ -57,7 +60,7 @@ export default function (state = initialState, action) {
       // set new state to the course
       changedCourse.state = action.payload.state;
 
-      updateCoursesAvailability(courses);
+      updateCoursesAvailability(changedCourse.dependents);
 
       stateStorage.set(changedCourse);
 
@@ -73,11 +76,9 @@ function updateCoursesAvailability(courses) {
   let course;
   let referredCourse;
 
-  Object.keys(courses).forEach(courseCode => {
-    course = courses[courseCode];
-
+  courses.forEach(course => {
     (course.dependencies.toSign.concat(course.dependencies.toApprove)).forEach(dep => {
-      referredCourse = courses[dep.course.code];
+      referredCourse = dep.course;
       dep.crossed    =
         (dep.type === 'S' && (referredCourse.state === 'A' || referredCourse.state === 'S')) || (dep.type === 'A' && referredCourse.state === 'A');
     });

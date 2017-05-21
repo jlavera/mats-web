@@ -45,40 +45,37 @@ export const doGetCoursesForCareer = (careerCode) => {
 
     return Promise.all([
         apiGateway.getCoursesByCareer(careerCode),
-        apiGateway.getTreeByCareer(careerCode)
+        apiGateway.getTreeByCareer(careerCode),
+        apiGateway.getReverseTreeByCareer(careerCode)
       ])
       .then(responses => {
-        let [courses, tree] = responses.map(byCode);
+        let [courses, tree, reverseTree] = responses.map(byCode);
 
-        // hydrate dependency with full course entity
-        let leaf;
+        // hydrate courses with it's dependencies and dependents
+        let course;
         let dependencies;
-        Object.keys(tree).forEach(leafKey => {
-          leaf = tree[leafKey];
+        let dependents;
+        Object.keys(courses).forEach(courseKey => {
+          course       = courses[courseKey];
 
-          dependencies      = leaf.dependencies.map(dep => ({
+          dependencies = tree[courseKey]         ? (tree[courseKey].dependencies.map(dep => ({
             type:   dep.type,
             course: courses[dep.code]
-          }));
-            // Object.assign({}, courses[dep.code], dep));
-          leaf.dependencies = {
+          }))) : [];
+          dependents   = reverseTree[courseKey] ? (reverseTree[courseKey].dependents.map(dep => courses[dep.code])) : [];
+
+          course.dependencies = {
             toSign:    dependencies.filter(dep => dep.type === 'S'),
             toApprove: dependencies.filter(dep => dep.type === 'A')
           };
-        });
-
-        // hydrate courses with it's dependencies
-        let course;
-        Object.keys(courses).forEach(courseKey => {
-          course = courses[courseKey];
-
-          Object.assign(course, tree[course.code] || {dependencies: {toSign: [], toApprove: []}});
+          course.dependents   = dependents;
         });
 
         dispatch(coursesListSuccess(careerCode, courses));
         dispatch(setInitialState(stateStorage.get()));
       })
       .catch(error => {
+        console.log(error.message);
         dispatch(coursesListError(error.message));
       })
     ;
