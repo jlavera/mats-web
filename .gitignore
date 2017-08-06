@@ -1,6 +1,7 @@
 *npm-debug.log
 dist/bundle.js
 dist
+.idea/
 
 # Created by https://www.gitignore.io/api/osx,windows,linux,visualstudiocode,webstorm,sublimetext,node
 
