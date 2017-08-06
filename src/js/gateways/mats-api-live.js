@@ -35,5 +35,23 @@ module.exports = {
       .then(response => response)
       .get('body')
     ;
-  }
+  },
+
+	signin: ({ username, password }) => {
+		return superagent.post(`${apiAddress}/auth`)
+			.set('Content-Type', 'application/json')
+			.send({ username, password })
+			.then(response => response)
+			.get('body')
+		;
+	},
+
+	signup: ({ username, password }) => {
+		return superagent.put(`${apiAddress}/users/${username}`)
+			.set('Content-Type', 'application/json')
+			.send({ password })
+			.then(response => response)
+			.get('body')
+		;
+	}
 };
