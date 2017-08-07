@@ -64,7 +64,6 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-		historyApiFallback: true,
     contentBase: './dist',
     hot: true
   },
