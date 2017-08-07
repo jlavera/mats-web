@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } 					from 'react-redux';
 import { Link } 						from 'react-router';
 
+require('./style.styl');
+
 class Header extends Component {
 	renderLinks() {
 		if(this.props.authenticated) {
@@ -24,9 +26,9 @@ class Header extends Component {
 
 	render() {
 		return (
-			<nav className="navbar navbar-light">
+			<nav className="header navbar navbar-light">
 				<Link to="/" className="navbar-brand">MATSSSS</Link>
-				<ul className="nav navbar-nav">
+				<ul className="nav navbar-nav navbar-right">
 					{this.renderLinks()}
 				</ul>
 			</nav>
