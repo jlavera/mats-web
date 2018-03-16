@@ -19,6 +19,7 @@ class CareersList extends Component {
 
   componentDidMount() {
     this.props.fs.doGetCareers();
+    this.props.fs.doSelectCareer('K');
   }
 
   render() {
@@ -28,7 +29,7 @@ class CareersList extends Component {
 
     return (
       <div>
-        <div className="flexcontainervertical careers-list">
+        <div className="flexcontainervertical careers-list hidden">
           {this.props.list.map(career => (
             <Career key={career.code} career={career} onClick={() => this.props.fs.doSelectCareer(career.code)} selected={this.props.selected}/>
           ))}
