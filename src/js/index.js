@@ -14,7 +14,9 @@ import components  from './components';
 
 require('../css/general.styl');
 
-require('../static/bootstrap/css/bootswatch.min.css');
+// require('../static/bootstrap/css/superhero.min.css');
+// require('../static/bootstrap/css/flatly.min.css');
+require('../static/bootstrap/css/lux.min.css');
 require('../static/bootstrap/js/bootstrap.min.js');
 require('../static/bootstrap/js/jquery-3.2.1.min.js');
 require('../static/bootstrap/fonts/glyphicons-halflings-regular.eot');

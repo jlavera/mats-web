@@ -11,7 +11,7 @@ class Year extends Component {
 
   render() {
     return (
-      <div className='col-xs-2'>
+      <div className='year col-xs-2'>
         <div className="year-title h2">{this.props.year}◦ año:</div>
         {orderedList(this.props.courses).map(course =>
           <Course key={course.code} course={course} onChangeState={this.props.onChangeState} />

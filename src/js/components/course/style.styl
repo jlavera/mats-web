@@ -1,31 +1,55 @@
+b(val) // b for bracket
+  unquote("[") + val + unquote("]")
+
+.course-container
+  display: grid
+  grid-gap: 0px
+  grid-template-columns: b(col) 25% b(col) 45% b(col) 15% b(col) 15%
+  grid-template-rows: b(row) 20px b(row) 20px b(row) 20px b(row) auto
+  margin: 10px 0
+  text-align: center
+
 .course-name
   font-size: small
-  float: left
+  grid-column: col 1 / span 2
+  grid-row: row 1/ span 2
+  text-transform: uppercase
 
-.course-arrow
-  float: right
+.course-button
+  padding: 0
   cursor: pointer
 
-.course-code
-  text-align: right
-  font-size: small
+.course-button-pending
+	grid-column: col 3 / span 2
+	grid-row: row 1
 
-.course-duration
+.course-button-signed
+	grid-column: col 3 / span 2
+	grid-row: row 2
+
+.course-button-approved
+	grid-column: col 3 / span 2
+	grid-row: row 3
+
+.course-status
+  grid-column: col 1 / span 2
+  grid-row: row 3
+  font-size: x-small
   text-align: center
-  font-size: small
 
-.course-hours
-  text-align: left
-  font-size: small
+.course-deps
+  grid-column: col 1 / span 4
+  grid-row: row 4
 
 .course-separator
   margin: 5px
 
-.panel-body
-  padding: 10px
-
-.panel-footer
-  padding: 0
-
 .dependency
+  text-align: left
   font-size: small
+
+.collapse.in
+  display: block !important
+
+.course-arrow
+  height: 10px
