@@ -126,6 +126,12 @@ class Course extends Component {
           <div className={(this.isSigned()   ? 'active' : '') + " btn btn-default btn-xs col-xs-4"} onClick={() => this.props.onChangeState('S', this.props.course.code)}> F </div>
           <div className={(this.isApproved() ? 'active' : '') + " btn btn-default btn-xs col-xs-4"} onClick={() => this.props.onChangeState('A', this.props.course.code)}> A </div>
           <div className="separator"></div>
+        <div className="course-grid-container">
+          <div className="course-grid-item-course-name">{this.props.course.name}</div>
+          <div className={'course-grid-item-course-button ' + (this.isNone()     ? 'active' : '') + " btn btn-default btn-xs"} onClick={() => this.props.onChangeState('N', this.props.course.code)}>Pendiente</div>
+          <div className={'course-grid-item-course-button ' + (this.isSigned()   ? 'active' : '') + " btn btn-default btn-xs"} onClick={() => this.props.onChangeState('S', this.props.course.code)}>Firmada</div>
+          <div className="course-grid-item-course-status">Bloqueada</div>
+          <div className={'course-grid-item-course-button ' + (this.isApproved() ? 'active' : '') + " btn btn-default btn-xs"} onClick={() => this.props.onChangeState('A', this.props.course.code)}>Aprobada</div>
         </div>
       </div>
       */
