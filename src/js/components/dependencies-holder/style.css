@@ -1,0 +1,31 @@
+.dependencies-holder {
+  display: inline-block;
+  width: 50%;
+}
+
+.circle {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+
+  border-radius: 50px;
+  vertical-align: middle;
+}
+
+.circle.green {
+  background: green;
+}
+.circle.orange {
+  background: orange;
+}
+.circle.red {
+  background: red;
+}
+
+.dependencies-holder-text {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+  font-size: 15px;
+  color: #C4C4C4;
+}

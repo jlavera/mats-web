@@ -1,0 +1,10 @@
+.year {
+  margin: 10px;
+  font-size: 30px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.year-title {
+  text-align: center;
+}

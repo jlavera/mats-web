@@ -1,0 +1,60 @@
+.state-switch-holder {
+  margin-left: 25px;
+}
+
+
+.line {
+  position: relative;
+
+  width: 250px;
+  height: 10px;
+
+  border-radius: 100px;
+}
+
+
+.dot {
+  position: relative;
+
+  transition: all 0.3s ease;
+
+  border-radius: 50%;
+
+  width: 30px;
+  height: 30px;
+
+  top: -100%;
+
+  cursor: pointer;
+}
+.dot.non-selected:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  transform-origin: center;
+}
+.dot.selected {
+  transform: scale(1.5);
+}
+
+
+.dot.pending {
+  float: left;
+}
+.dot.signed {
+  display: inline-block;
+}
+.dot.approved {
+  float: right;
+}
+
+
+.now-pending {
+  background: #E9E9E9;
+}
+.now-signed {
+  background: #FFDF3A;
+}
+.now-approved {
+  background: #5DC178;
+}

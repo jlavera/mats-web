@@ -1,0 +1,30 @@
+.course-holder {
+  padding: 25px 15px 0px 15px;
+  border: 2px solid #C4C4C4;
+  text-align: center;
+  width: 300px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.course-name {
+  float: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  width: 90%;
+  color: #171717;
+  margin: 5px 0px 5px 0px;
+  font-size: 20px;
+}
+
+.course-hours {
+  display: inline-block;
+  text-align: left;
+  vertical-align: super;
+
+  width: 10%;
+  color: grey;
+  font-size: 10px;
+}

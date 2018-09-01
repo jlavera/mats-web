@@ -1,0 +1,27 @@
+html {
+  padding: 10px;
+}
+
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.underlined {
+  text-decoration: underline;
+}
+
+.crossed {
+  text-decoration: line-through;
+}
+
+.right {
+  text-align: right;
+}
+
+.separator {
+  clear: both;
+}
