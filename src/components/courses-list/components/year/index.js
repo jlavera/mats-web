@@ -24,11 +24,11 @@ const Year = props => {
     year,
   } = props;
 
-  const renderCourse = course => <Course key={course.code} course={course} onChangeState={onChangeState} readMode={readMode} />; 
+  const renderCourse = course => <Course key={course.code} course={course} onChangeState={onChangeState} readMode={readMode} />;
 
   return (
     <div className='year col-xs-2'>
-      <div className="year-title h2">{year}° año</div>
+      <div className="year-title h2">{ +year + 1 }° año</div>
       {sortCourses(courses).map(renderCourse)}
     </div>
   );
@@ -63,7 +63,7 @@ Year.propTypes = {
   })).isRequired,
   onChangeState: func.isRequired,
   readMode: bool,
-  year: string.isRequired,
+  year: number.isRequired,
 };
 
 export default Year;
