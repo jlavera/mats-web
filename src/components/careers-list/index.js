@@ -11,7 +11,7 @@ class CareersList extends Component {
   }
 
   componentDidMount() {
-    this.props.doGetCareers();
+    // this.props.doGetCareers();
   }
 
   selectCareer = code => {
@@ -23,14 +23,14 @@ class CareersList extends Component {
     const { selectedCareerCode } = this.state;
 
     return (
-      <Career 
+      <Career
         key={code}
-        // image={} 
-        name={name} 
-        onClick={() => this.selectCareer(code)} 
+        // image={}
+        name={name}
+        onClick={() => this.selectCareer(code)}
         selected={code === selectedCareerCode}
       />
-    ); 
+    );
   }
 
   render() {

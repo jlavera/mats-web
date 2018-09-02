@@ -1,5 +1,5 @@
-import * as stateStorage from '../../services/stateStorage';
-import * as apiGateway   from '../../gateways/mats-api';
+import * as stateStorage from '../../../services/stateStorage';
+import * as apiGateway   from '../../../gateways/mats-api';
 
 export const COURSESLIST_REQUEST = 'COURSESLIST_REQUEST';
 export const COURSESLIST_SUCCESS = 'COURSESLIST_SUCCESS';

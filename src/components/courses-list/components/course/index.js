@@ -1,5 +1,6 @@
 import React from 'react'
 import { always, cond } from 'ramda';
+import { func, string, shape } from 'prop-types';
 import { DependenciesHolder, StateSwitch } from './components';
 import './style.css';
 
@@ -36,19 +37,12 @@ const getStatus = cond([
 ]);
 
 const Course = props => {
-  const { 
-    course: {
-      hours,
-      name,
-      state
-    }, 
-    onChangeState
-  } = props;
-  
+  const { course, onChangeState } = props;
+  const { hours, name, state }    = course;
+
   return (
     <div className='course-holder'>
-      {getStatus(course)}
-      <StateSwitch course={course} currentState={state} onChangeState={onChangeState} />
+      <StateSwitch course={course} onChangeState={onChangeState} />
       <div className='course-name'>{name}</div>
       <div className='course-hours'>{hours}hs</div>
       <DependenciesHolder text='Para firmar'/>

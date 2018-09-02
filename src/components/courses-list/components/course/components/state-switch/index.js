@@ -2,44 +2,47 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import classNames from 'classnames';
 import { func, shape, string } from 'prop-types';
- 
+
 import './style.css';
 
-const isPending = currentState => !currentState || currentState === 'P';
-const isSigned = currentState => currentState === 'S';
-const isApproved = currentState => currentState === 'A';
+const isPending = state => !state || state === 'P';
+const isSigned = state => state === 'S';
+const isApproved = state => state === 'A';
+
+const isNowState = state => [
+  { 'now-signed': isSigned(state) },
+  { 'now-approved': isApproved(state) },
+  { 'now-pending': isPending(state) }
+];
+const isSelected = (f, state) => [
+  { 'selected': f(state) },
+  { 'non-selected': !f(state) }
+];
 
 const StateSwitch = props => {
-  const { 
-    currentState, 
-    course: { code }, 
-    onChangeState 
+  const {
+    course: { code, state },
+    onChangeState
   } = props;
 
-  const lineClass = classNames(
-    'line',
-    { 'now-signed': isSigned(currentState) },
-    { 'now-approved': isApproved(currentState) },
-    { 'now-pending': isPending(currentState) },
-  );
+  const lineClass = classNames([
+    'line'
+  ].concat(isNowState(state)));
 
-  const pendingClass = classNames(
+  const pendingClass = classNames([
     'dot',
-    { 'selected': isPending(currentState) },
-    { 'non-selected': !isPending(currentState) },
-  );
+    'pending',
+  ].concat(isSelected(isPending, state), isNowState(state)));
 
-  const signedClass = classNames(
+  const signedClass = classNames([
     'dot',
-    { 'selected': isSigned(currentState) },
-    { 'non-selected': !isSigned(currentState) },
-  );
+    'signed'
+  ].concat(isSelected(isSigned, state), isNowState(state)));
 
-  const approvedClass = classNames(
+  const approvedClass = classNames([
     'dot',
-    { 'selected': isApproved(currentState) },
-    { 'non-selected': !isApproved(currentState) },
-  );
+    'approved'
+  ].concat(isSelected(isApproved, state), isNowState(state)));
 
   return (
     <div className='state-switch-holder'>
@@ -53,9 +56,9 @@ const StateSwitch = props => {
 };
 
 StateSwitch.propTypes = {
-  currentState: string.isRequired,
   course: shape({
     code: string.isRequired,
+    state: string.isRequired
   }),
   onChangeState: func.isRequired,
 };

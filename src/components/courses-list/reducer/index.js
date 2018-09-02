@@ -1,4 +1,4 @@
-import * as stateStorage from '../../services/stateStorage';
+import * as stateStorage from '../../../services/stateStorage';
 
 import {
   COURSESLIST_REQUEST,
@@ -6,7 +6,7 @@ import {
   COURSESLIST_ERROR,
   CHANGESTATE,
   UPDATESUCCESS
-} from './actions';
+} from '../actions';
 
 const initialState = {
   fixture:    {},
@@ -27,7 +27,7 @@ export default function (state = initialState, action) {
 
       // ????? xdd
 
-      let courses       = state.get('fixture').slice();
+      let courses       = state.fixture;
       let changedCourse = searchByCode(courses, action.payload.code);
 
       // look for it as an optional
@@ -46,9 +46,7 @@ export default function (state = initialState, action) {
 
       stateStorage.set(changedCourse);
 
-      return state
-        .set('fixture', courses)
-      ;
+      return { ...state, fixture: courses };
     case UPDATESUCCESS:
       // TODO show success dialog
       return state;
