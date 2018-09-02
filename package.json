@@ -7,6 +7,7 @@
     "bluebird": "3.5.1",
     "classnames": "^2.2.6",
     "immutable": "3.8.2",
+    "ramda": "^0.25.0",
     "react": "16.4.2",
     "react-dom": "16.4.2",
     "react-redux": "5.0.7",
@@ -20,7 +21,7 @@
     "superagent": "3.8.3",
     "superagent-promise": "1.1.0"
   },
-  "proxy": "http://localhost:8088",
+  "proxy": "http://localhost:8088/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
