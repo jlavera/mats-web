@@ -51,11 +51,17 @@ const Course = props => {
   );
 };
 
+Course.defaultProps = {
+  course: {
+    state: 'P'
+  }
+};
+
 Course.propTypes = {
   course: shape({
     hours: string.isRequired,
     name: string.isRequired,
-    state: string.isRequired,
+    state: string,
   }).isRequired,
   onChangeState: func.isRequired,
 };

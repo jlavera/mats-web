@@ -66,7 +66,7 @@ class CoursesList extends Component {
   renderYear = ([year, courses]) => (
     <Year
       key={`year${year}`}
-      year={year}
+      year={+year}
       courses={courses}
       onChangeState={this.props.doChangeStateCourse}
       readMode={this.state.readMode}

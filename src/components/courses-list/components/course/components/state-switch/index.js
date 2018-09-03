@@ -55,10 +55,16 @@ const StateSwitch = props => {
   );
 };
 
+StateSwitch.defaultProps = {
+  course: {
+    state: 'P'
+  }
+};
+
 StateSwitch.propTypes = {
   course: shape({
     code: string.isRequired,
-    state: string.isRequired
+    state: string
   }),
   onChangeState: func.isRequired,
 };

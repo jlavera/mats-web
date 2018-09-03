@@ -56,7 +56,7 @@ Year.defaultProps = {
 Year.propTypes = {
   courses: arrayOf(shape({
     code: string.isRequired,
-    duration: number.isRequired,
+    duration: string.isRequired,
     main: bool.isRequired,
     name: string.isRequired,
     optative: bool.isRequired,
