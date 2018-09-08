@@ -2,6 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router'
 import classNames from 'classnames';
 import { func, shape, string } from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 
 import './style.css';
 
@@ -47,9 +48,21 @@ const StateSwitch = props => {
   return (
     <div className='state-switch-holder'>
       <div className={lineClass}>
-        <div className={pendingClass} onClick={() => onChangeState('P', code)} />
-        <div className={signedClass} onClick={() => onChangeState('S', code)} />
-        <div className={approvedClass} onClick={() => onChangeState('A', code)} />
+        <div data-tip data-for='dot-pending' className={pendingClass} onClick={() => onChangeState('P', code)} />
+        <ReactTooltip id='dot-pending' type='dark'>
+        <span>Pendiente</span>
+        </ReactTooltip>
+
+        <div data-tip data-for='dot-signed' className={signedClass} onClick={() => onChangeState('S', code)} />
+        <ReactTooltip id='dot-signed' type='dark'>
+        <span>Firmada</span>
+        </ReactTooltip>
+
+        <div data-tip data-for='dot-approved' className={approvedClass} onClick={() => onChangeState('A', code)} />
+        <ReactTooltip id='dot-approved' type='dark'>
+        <span>Aprobada</span>
+        </ReactTooltip>
+
       </div>
     </div>
   );

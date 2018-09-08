@@ -10,16 +10,7 @@
 
   border-radius: 50px;
   vertical-align: middle;
-}
-
-.circle.green {
-  background: green;
-}
-.circle.orange {
-  background: orange;
-}
-.circle.red {
-  background: red;
+  background: darkgray;
 }
 
 .dependencies-holder-text {
@@ -28,4 +19,14 @@
   margin-left: 5px;
   font-size: 15px;
   color: #C4C4C4;
+}
+
+.dependencies-list-tooltip {
+  list-style: none;
+  text-align: left;
+  padding: 0 25px;
+}
+
+.dependency.dependency-crossed {
+  text-decoration: line-through;
 }

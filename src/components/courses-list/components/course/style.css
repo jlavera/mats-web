@@ -8,6 +8,10 @@
   position: relative;
 }
 
+.course-holder-blocked {
+  opacity: 0.5;
+}
+
 .course-name {
   float: left;
   text-overflow: ellipsis;

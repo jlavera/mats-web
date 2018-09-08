@@ -1,7 +1,7 @@
 import React from 'react'
-import { always, cond } from 'ramda';
 import { func, string, shape } from 'prop-types';
 import classNames from 'classnames';
+import ReactTooltip from 'react-tooltip';
 import { DependenciesHolder, StateSwitch } from './components';
 import './style.css';
 
@@ -34,15 +34,25 @@ const Course = props => {
   const { hours, name }           = course;
 
   return (
-    <div className='course-holder'>
+    <div className={classNames(['course-holder', {'course-holder-blocked': isBlockedToSign(course)}])}>
       <StateSwitch course={course} onChangeState={onChangeState} />
+
       <div className='course-name'>{name}</div>
       <div className='course-hours'>{hours}hs</div>
-      <i className={classNames(['fas', 'fa-lock', 'course-lock', {'show': isBlockedToSign(course)}])}></i>
-      <i className={classNames(['fas', 'fa-exclamation', 'course-exclamation', {'show': !isBlockedToSign(course) && isBlockedToApprove(course)}])}></i>
+
+      <i data-tip data-for='lock-tooltip' className={classNames(['fas', 'fa-lock', 'course-lock', {'show': isBlockedToSign(course)}])}></i>
+      <ReactTooltip id='lock-tooltip' type='error'>
+        <span>Bloqueada para cursar</span>
+      </ReactTooltip>
+
+      <i data-tip data-for='exclamation-tooltip' className={classNames(['fas', 'fa-exclamation', 'course-exclamation', {'show': !isBlockedToSign(course) && isBlockedToApprove(course)}])}></i>
+      <ReactTooltip id='exclamation-tooltip' type='warning'>
+        <span>Bloqueada para rendir final</span>
+      </ReactTooltip>
+
       <div>
-        <DependenciesHolder text='Para firmar'  requiredState='S' signed={course.dependencies.signed} approved={course.dependencies.approved} />
-        <DependenciesHolder text='Para aprobar' requiredState='A' signed={[]} approved={course.dependencies.signed.concat(course.dependencies.approved)} />
+        <DependenciesHolder text='Para firmar'  code={course.code} requiredState='S' signed={course.dependencies.signed} approved={course.dependencies.approved} />
+        <DependenciesHolder text='Para aprobar' code={course.code} requiredState='A' signed={[]} approved={course.dependencies.signed.concat(course.dependencies.approved)} />
       </div>
     </div>
   );
