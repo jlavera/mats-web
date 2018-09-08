@@ -5,6 +5,7 @@
   width: 300px;
   border-radius: 10px;
   margin-bottom: 5px;
+  position: relative;
 }
 
 .course-name {
@@ -27,4 +28,24 @@
   width: 10%;
   color: grey;
   font-size: 10px;
+}
+
+.course-lock, .course-exclamation {
+  position: absolute;
+  right: 2%;
+  top: 5%;
+  font-size: medium;
+  display: none;
+}
+
+.course-lock {
+  color: red;
+}
+
+.course-exclamation {
+  color: orange;
+}
+
+.course-lock.show, .course-exclamation.show {
+  display: block;
 }
