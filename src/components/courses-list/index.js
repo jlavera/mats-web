@@ -2,46 +2,14 @@ import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 import { withRouter }       from 'react-router'
 
-import { compose, reduce } from 'ramda';
-
+import { compose } from 'ramda';
 import { doGetCoursesForCareer, doChangeStateCourse } from './actions';
 
-import Year from './components/year';
+import { Year } from './components';
 
-function groupByYear(courses) {
-  let groups = [];
-
-  let course;
-  Object.keys(courses).forEach(courseCode => {
-    course = courses[courseCode];
-
-    if (!groups[course.year]) {
-      groups[course.year] = [];
-    }
-
-    groups[course.year].push(course);
-  });
-
-  // groups = groups.sort((dep1, dep2) => dep1.name < dep2.name ? 1 : -1);
-
-  // remove year 0
-  return groups.slice(1);
-}
-
-// const groupByYear = courses => {
-//   console.log(courses);
-//   return Object.keys(courses).reduce((acc, code) => ({  }), {});
-// }
-// const groupByYear = courses => courses.reduce((acc, course) => ({ [course.year]: [ ...acc[course.year], course ] }), {});
-
-const parseCommaSeparatedQueryParam = param => (param || '').split(',').filter(Boolean);
-
-const formatWithCourseStatus = status => reduce((acc, code) => ({ ...acc, [code]: status }), {});
-
-// lel da namez - luquitas be proud
-const formatWithStatusFromCommaSeparatedQueryParam = status => compose(formatWithCourseStatus(status), parseCommaSeparatedQueryParam);
-
-// TODO: mover las 4 a utils o a un selector
+import { formatWithStatusFromCommaSeparatedString } from './utils';
+import { isFetchingCoursesSelector, sortedCoursesByYearSelector } from './selectors';
+import { selectedCareerSelector } from '../careers-list/selectors';
 
 class CoursesList extends Component {
   state = {
@@ -55,12 +23,12 @@ class CoursesList extends Component {
   componentDidMount() {
     const { signed, approved } = this.props.location.query;
 
-    const parsedSigned = formatWithStatusFromCommaSeparatedQueryParam('S')(signed);
-    const parseApproved = formatWithStatusFromCommaSeparatedQueryParam('A')(approved);
+    const parsedSigned = formatWithStatusFromCommaSeparatedString('S')(signed);
+    const parseApproved = formatWithStatusFromCommaSeparatedString('A')(approved);
 
     const coursesState = { ...parsedSigned, ...parseApproved };
 
-    this.props.doGetCoursesForCareer('K' /* this.props.selected TODO: esta no va a existir si esta en el state de careers */, coursesState);
+    this.props.doGetCoursesForCareer(this.props.selectedCareer, coursesState);
   }
 
   renderYear = ([year, courses]) => (
@@ -91,13 +59,10 @@ class CoursesList extends Component {
   }
 };
 
-// selector me plz
 const mapStateToProps = state => ({
-  list:       groupByYear(state.coursesList.fixture),
-  isFetching: state.coursesList.isFetching,
-  error:      state.coursesList.error,
-  selected:   state.careersList.selected,
-  loaded:     state.coursesList.loaded,
+  list:           sortedCoursesByYearSelector(state),
+  isFetching:     isFetchingCoursesSelector(state),
+  selectedCareer: selectedCareerSelector(state),
 });
 
 const actions = { doGetCoursesForCareer, doChangeStateCourse };

@@ -77,7 +77,7 @@ const changeState = (state, courseCode) => {
 export const doChangeStateCourse = (state, courseCode) => {
   return function (dispatch) {
     // TODO kek get user
-    apiGateway.setStateToUser('1440135', courseCode, state);
+    // apiGateway.setStateToUser('1440135', courseCode, state);
     dispatch(changeState(state, courseCode));
   };
 }

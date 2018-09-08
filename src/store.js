@@ -12,7 +12,7 @@ const store = createStore(
   applyMiddleware(
     thunk, 
     promise, 
-    createLogger(), 
+    // createLogger(), 
     routerMiddleware(browserHistory)
   )
 );

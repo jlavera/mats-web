@@ -8,6 +8,7 @@ const initialState = {
   list:       [],
   isFetching: false,
   error:      '',
+  selected:   'K',
 };
 
 export default function (state = initialState, action) {

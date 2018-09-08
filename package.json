@@ -19,6 +19,7 @@
     "redux-logger": "3.0.6",
     "redux-promise": "0.6.0",
     "redux-thunk": "2.3.0",
+    "reselect": "^3.0.1",
     "superagent": "3.8.3",
     "superagent-promise": "1.1.0"
   },

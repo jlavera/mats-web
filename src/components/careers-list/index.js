@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 import { doGetCareers }     from './actions';
 import { Career }           from './components';
+import { 
+  careersSelector, 
+  isFetchingCareerSelector, 
+  careersErrorSelector 
+} from './selectors';
 
 import './style.css';
 
@@ -11,7 +16,7 @@ class CareersList extends Component {
   }
 
   componentDidMount() {
-    // this.props.doGetCareers();
+    this.props.doGetCareers();
   }
 
   selectCareer = code => {
@@ -49,9 +54,9 @@ class CareersList extends Component {
 };
 
 const mapStateToProps = state => ({
-  list:       state.careersList.list,
-  isFetching: state.careersList.isFetching,
-  error:      state.careersList.error,
+  list:       careersSelector(state),
+  isFetching: isFetchingCareerSelector(state),
+  error:      careersErrorSelector(state),
 });
 
 export default connect(mapStateToProps, { doGetCareers })(CareersList)
