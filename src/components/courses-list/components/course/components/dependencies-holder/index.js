@@ -2,15 +2,21 @@ import React from 'react'
 import { arrayOf, string, shape } from 'prop-types';
 import './style.css';
 
-const DependenciesHolder = props => {
-  const toSign = props.requiredState === 'S';
+const RemainingRequirementsLabel = ({ text, signed, approved }) => {
+  const actualSignedCount = signed.filter(c => c.state === 'S' || c.state === 'A').length;
+  const actualApprovedCount = approved.filter(c => c.state === 'A').length;
+  
+  const totalSignedRequired = signed.length;
+  const totalApprovedRequired = approved.length;
 
+  return <span>{text} { actualSignedCount + actualApprovedCount }/{totalSignedRequired + totalApprovedRequired}</span>
+}
+const DependenciesHolder = props => {
   return (
     <div className='dependencies-holder'>
       <div className='circle green'></div>
       <div className='dependencies-holder-text'>
-        { props.text }
-        1 /{ props.signed.length + props.approved.length }
+        <RemainingRequirementsLabel text={props.text} signed={props.signed} approved={props.approved} /> 
       </div>
     </div>
   );

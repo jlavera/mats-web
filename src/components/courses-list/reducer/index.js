@@ -13,7 +13,6 @@ const initialState = {
   fixture:    [],
   isFetching: false,
   error:      null,
-  loaded:     null,
 };
 
 export default function (state = initialState, action) {
@@ -21,7 +20,7 @@ export default function (state = initialState, action) {
     case COURSESLIST_REQUEST:
       return { ...state, isFetching: true, error: null, fixture: [] };
     case COURSESLIST_SUCCESS:
-      return { ...state, isFetching: false, fixture: action.payload.courses, loaded: action.payload.careerCode };
+      return { ...state, isFetching: false, fixture: action.payload.courses };
     case COURSESLIST_ERROR:
       return { ...state, isFetching: false, error: action.payload.error };
     case CHANGESTATE:

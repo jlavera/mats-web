@@ -31,7 +31,7 @@ const isApproved = course => course.state === 'A';
 
 const Course = props => {
   const { course, onChangeState } = props;
-  const { hours, name, state }    = course;
+  const { hours, name }           = course;
 
   return (
     <div className='course-holder'>

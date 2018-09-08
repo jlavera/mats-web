@@ -14,7 +14,6 @@ const coursesListSuccess = (careerCode, courses, tree) => ({
   payload: {
     careerCode,
     courses,
-    tree
   }
 });
 
@@ -26,9 +25,7 @@ const coursesListError = error => ({
 });
 
 export const doGetCoursesForCareer = (careerCode, defaultState) => {
-  const byCode = courses => courses.reduce((acc, course) => ({ ...acc, [course.code]: course }), {});
-
-  return function (dispatch) {
+  return dispatch => {
     dispatch(coursesListRequest());
 
     return Promise.all([
@@ -36,26 +33,20 @@ export const doGetCoursesForCareer = (careerCode, defaultState) => {
         apiGateway.getOptionalByCareer(careerCode)
       ])
       .then(responses => {
-        const [courses, optionals] = responses;
-        const coursesByCode        = byCode(courses);
-
-        // hydrate courses in dependencies and dependents
-        courses.forEach(course => {
-          course.dependents            = course.dependents.map(dep => coursesByCode[dep]);
-          course.dependencies.signed   = course.dependencies.signed.map(dep => coursesByCode[dep]);
-          course.dependencies.approved = course.dependencies.approved.map(dep => coursesByCode[dep]);
-        });
-
+        const [courses/* , optionals */] = responses;
         dispatch(coursesListSuccess(careerCode, courses));
 
-        const initialState = Object.keys(defaultState).length ? defaultState : stateStorage.get();
+        
+        // cheesus TODO: pensar esto
+        // la cantidad de rerender que esta metiendo is over 9000
+        // en realidad 30 y pico xd
+        const initialState = Object.keys(defaultState).length ? defaultState : stateStorage.get(); 
 
         Object.keys(initialState).forEach(key => {
           dispatch(changeState(initialState[key], key));
         });
       })
       .catch(error => {
-        console.log(error.message);
         dispatch(coursesListError(error.message));
       })
     ;
@@ -75,7 +66,7 @@ const changeState = (state, courseCode) => {
 };
 
 export const doChangeStateCourse = (state, courseCode) => {
-  return function (dispatch) {
+  return dispatch => {
     // TODO kek get user
     // apiGateway.setStateToUser('1440135', courseCode, state);
     dispatch(changeState(state, courseCode));

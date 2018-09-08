@@ -13,7 +13,6 @@ export const getCareers = () => superagent
   .get(`${apiAddress}/careers`)
   .set('Content-Type', 'application/json')
   .then(response => response)
-  .tap(console.log)
   .get('body');
 
 export const getCoursesByCareer = careerCode => superagent
