@@ -1,6 +1,7 @@
 import React from 'react'
 import { always, cond } from 'ramda';
 import { func, string, shape } from 'prop-types';
+import classNames from 'classnames';
 import { DependenciesHolder, StateSwitch } from './components';
 import './style.css';
 
@@ -28,14 +29,6 @@ const isSigned = course => course.state === 'S';
 
 const isApproved = course => course.state === 'A';
 
-const getStatus = cond([
-  [ isApproved, always(<div className="bg-success text-white course-status">APROBADA</div>) ],
-  [ isBlockedToSign, always(<div className="bg-success text-white course-status">BLOQUEADA</div>) ],
-  [ isBlockedToApprove, always(<div className="bg-success text-white course-status">BLOQUEADA P/ FINAL</div>) ],
-  [ isPending, always(<div className="bg-success text-white course-status">HABILITADA</div>) ],
-  [ isSigned, always(<div className="bg-success text-white course-status">FIRMADA</div>) ],
-]);
-
 const Course = props => {
   const { course, onChangeState } = props;
   const { hours, name, state }    = course;
@@ -45,8 +38,12 @@ const Course = props => {
       <StateSwitch course={course} onChangeState={onChangeState} />
       <div className='course-name'>{name}</div>
       <div className='course-hours'>{hours}hs</div>
-      <DependenciesHolder text='Para firmar'/>
-      <DependenciesHolder text='Para aprobar'/>
+      <i className={classNames(['fas', 'fa-lock', 'course-lock', {'show': isBlockedToSign(course)}])}></i>
+      <i className={classNames(['fas', 'fa-exclamation', 'course-exclamation', {'show': !isBlockedToSign(course) && isBlockedToApprove(course)}])}></i>
+      <div>
+        <DependenciesHolder text='Para firmar'  requiredState='S' signed={course.dependencies.signed} approved={course.dependencies.approved} />
+        <DependenciesHolder text='Para aprobar' requiredState='A' signed={[]} approved={course.dependencies.signed.concat(course.dependencies.approved)} />
+      </div>
     </div>
   );
 };
