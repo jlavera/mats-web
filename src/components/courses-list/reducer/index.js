@@ -25,6 +25,9 @@ export default function (state = initialState, action) {
       return { ...state, isFetching: false, error: action.payload.error };
     case CHANGESTATE:
       const course = state.fixture.find(propEq('code', action.payload.code));
+
+      if (!course) return state;
+
       const rest = reject(propEq('code', action.payload.code))(state.fixture);
       const updatedCourse = { ...course, state: action.payload.state };
 

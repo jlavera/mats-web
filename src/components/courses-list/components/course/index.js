@@ -41,7 +41,7 @@ const Course = props => {
       <div className='course-hours'>{hours}hs</div>
 
       {isBlockedToSign(course) &&
-        <Fragment> 
+        <Fragment>
           <i data-tip data-for='lock-tooltip' className={classNames(['fas', 'fa-lock', 'course-lock'])} />
           <ReactTooltip id='lock-tooltip' type='error'>
             <span>Bloqueada para cursar</span>
@@ -50,31 +50,31 @@ const Course = props => {
       }
 
       {!isBlockedToSign(course) && isBlockedToApprove(course) &&
-        <Fragment> 
+        <Fragment>
           <i data-tip data-for='exclamation-tooltip' className={classNames(['fas', 'fa-exclamation', 'course-exclamation'])} />
           <ReactTooltip id='exclamation-tooltip' type='warning'>
             <span>Bloqueada para rendir final</span>
           </ReactTooltip>
         </Fragment>
       }
-      
+
       <div>
-        <DependenciesHolder 
-          text='Para cursar'  
-          code={course.code} 
-          requiredState='S' 
+        <DependenciesHolder
+          text='P/ cursar'
+          code={course.code}
+          requiredState='S'
           isBlocked={isBlockedToSign(course)}
-          signed={course.dependencies.signed} 
-          approved={course.dependencies.approved} 
+          signed={course.dependencies.signed}
+          approved={course.dependencies.approved}
         />
 
-        <DependenciesHolder 
-          text='Para rendir final' 
-          code={course.code} 
-          requiredState='A' 
+        <DependenciesHolder
+          text='P/ rendir final' 
+          code={course.code}
+          requiredState='A'
           isBlocked={isBlockedToSign(course)}
-          signed={[]} 
-          approved={[ ...course.dependencies.signed, ...course.dependencies.approved]} 
+          signed={[]}
+          approved={[ ...course.dependencies.signed, ...course.dependencies.approved]}
         />
       </div>
     </div>

@@ -10,6 +10,7 @@ import { Year } from './components';
 import { formatWithStatusFromCommaSeparatedString } from './utils';
 import { isFetchingCoursesSelector, sortedCoursesByYearSelector } from './selectors';
 import { selectedCareerSelector } from '../careers-list/selectors';
+import './style.css';
 
 class CoursesList extends Component {
   state = {
@@ -52,7 +53,7 @@ class CoursesList extends Component {
     }
 
     return (
-      <div className="flexcontainerhorizontal row center">
+      <div className="years-holder">
         {Object.entries(list).map(this.renderYear)}
       </div>
     );

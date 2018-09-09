@@ -36,11 +36,10 @@ export const doGetCoursesForCareer = (careerCode, defaultState) => {
         const [courses/* , optionals */] = responses;
         dispatch(coursesListSuccess(careerCode, courses));
 
-        
         // cheesus TODO: pensar esto
         // la cantidad de rerender que esta metiendo is over 9000
         // en realidad 30 y pico xd
-        const initialState = Object.keys(defaultState).length ? defaultState : stateStorage.get(); 
+        const initialState = Object.keys(defaultState).length ? defaultState : stateStorage.get();
 
         Object.keys(initialState).forEach(key => {
           dispatch(changeState(initialState[key], key));

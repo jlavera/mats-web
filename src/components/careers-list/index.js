@@ -46,7 +46,7 @@ class CareersList extends Component {
     }
 
     return (
-      <div className="flexcontainervertical careers-list hidden">
+      <div className="careers-list hidden">
         {list.map(this.renderCareer)}
       </div>
     );
