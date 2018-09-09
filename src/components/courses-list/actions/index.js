@@ -28,12 +28,9 @@ export const doGetCoursesForCareer = (careerCode, defaultState) => {
   return dispatch => {
     dispatch(coursesListRequest());
 
-    return Promise.all([
-        apiGateway.getCoursesByCareer(careerCode),
-        apiGateway.getOptionalByCareer(careerCode)
-      ])
-      .then(responses => {
-        const [courses/* , optionals */] = responses;
+    return apiGateway.getCareer(careerCode)
+      .then(career => {
+        const { courses/* , optionals */} = career;
         dispatch(coursesListSuccess(careerCode, courses));
 
         // cheesus TODO: pensar esto

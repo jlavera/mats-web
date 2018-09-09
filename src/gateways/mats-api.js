@@ -15,17 +15,11 @@ export const getCareers = () => superagent
   .then(response => response)
   .get('body');
 
-export const getCoursesByCareer = careerCode => superagent
-  .get(`${apiAddress}/careers/${careerCode}/courses`)
+export const getCareer = careerCode => superagent
+  .get(`${apiAddress}/careers/${careerCode}`)
   .set('Content-Type', 'application/json')
   .then(response => response)
   .get('body');
-
-export const getOptionalByCareer = careerCode => superagent
-  .get(`${apiAddress}/careers/${careerCode}/optionals`)
-  .set('Content-Type', 'application/json')
-  .then(response => response)
-  .get('body'); 
 
 export const getUser = username => superagent
   .get(`${apiAddress}/users/${username}`)
