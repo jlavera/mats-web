@@ -3,14 +3,34 @@
   width: 50%;
 }
 
-.circle {
+.gray-circle {
   display: inline-block;
   width: 15px;
   height: 15px;
 
   border-radius: 50px;
   vertical-align: middle;
-  background: darkgray;
+  background: #E9E9E9;
+}
+
+.yellow-circle {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+
+  border-radius: 50px;
+  vertical-align: middle;
+  background: #FFDF3A;
+}
+
+.green-circle {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+
+  border-radius: 50px;
+  vertical-align: middle;
+  background: #5DC178;
 }
 
 .dependencies-holder-text {
