@@ -67,11 +67,9 @@
 .status-read-mode {
   font-size: 15px;
   text-transform: uppercase;
-}
-
-.status-read-mode-P {
   color: red;
 }
+
 .status-read-mode-S {
   color: orange;
 }
