@@ -20,10 +20,13 @@ const isSelected = (f, state) => [
   { 'non-selected': !f(state) }
 ];
 
+const stateString = state => isApproved(state) ? 'Aprobada' : isSigned(state) ? 'Firmada' : 'Pendiente';
+
 const StateSwitch = props => {
   const {
     course: { code, state },
-    onChangeState
+    onChangeState,
+    readMode
   } = props;
 
   const lineClass = classNames([
@@ -47,23 +50,27 @@ const StateSwitch = props => {
 
   return (
     <div className='state-switch-holder'>
-      <div className={lineClass}>
-        <div data-tip data-for='dot-pending' className={pendingClass} onClick={() => onChangeState('P', code)} />
-        <ReactTooltip id='dot-pending' type='dark'>
-        <span>Pendiente</span>
-        </ReactTooltip>
+      {readMode ? (
+          <div className={classNames(['status-read-mode', `status-read-mode-${state}`])}>{stateString(state)}</div>
+        ) : (
+          <div className={lineClass}>
+            <div data-tip data-for='dot-pending' className={pendingClass} onClick={() => onChangeState('P', code)} />
+            <ReactTooltip id='dot-pending' type='dark'>
+            <span>Pendiente</span>
+            </ReactTooltip>
 
-        <div data-tip data-for='dot-signed' className={signedClass} onClick={() => onChangeState('S', code)} />
-        <ReactTooltip id='dot-signed' type='dark'>
-        <span>Firmada</span>
-        </ReactTooltip>
+            <div data-tip data-for='dot-signed' className={signedClass} onClick={() => onChangeState('S', code)} />
+            <ReactTooltip id='dot-signed' type='dark'>
+            <span>Firmada</span>
+            </ReactTooltip>
 
-        <div data-tip data-for='dot-approved' className={approvedClass} onClick={() => onChangeState('A', code)} />
-        <ReactTooltip id='dot-approved' type='dark'>
-        <span>Aprobada</span>
-        </ReactTooltip>
+            <div data-tip data-for='dot-approved' className={approvedClass} onClick={() => onChangeState('A', code)} />
+            <ReactTooltip id='dot-approved' type='dark'>
+            <span>Aprobada</span>
+            </ReactTooltip>
 
-      </div>
+          </div>
+      )}
     </div>
   );
 };

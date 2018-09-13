@@ -12,6 +12,10 @@
   border-radius: 100px;
 }
 
+.line-read-mode {
+  width: 200px;
+}
+
 
 .dot {
   position: relative;
@@ -57,4 +61,20 @@
 }
 .now-approved {
   background: #5DC178;
+}
+
+
+.status-read-mode {
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.status-read-mode-P {
+  color: red;
+}
+.status-read-mode-S {
+  color: orange;
+}
+.status-read-mode-A {
+  color: green;
 }

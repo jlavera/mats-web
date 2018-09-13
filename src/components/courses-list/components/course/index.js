@@ -30,12 +30,12 @@ const isSigned = course => course.state === 'S';
 const isApproved = course => course.state === 'A';
 
 const Course = props => {
-  const { course, onChangeState } = props;
-  const { hours, name }           = course;
+  const { course, onChangeState, readMode } = props;
+  const { hours, name }                     = course;
 
   return (
-    <div className={classNames(['course-holder', {'course-holder-blocked': isBlockedToSign(course)}])}>
-      <StateSwitch course={course} onChangeState={onChangeState} />
+    <div className={classNames(['course-holder', {'course-holder-blocked': isBlockedToSign(course)}, {'course-holder-read-mode': readMode}])}>
+     <StateSwitch course={course} onChangeState={onChangeState} readMode={readMode} />
 
       <div className='course-name'>{name}</div>
       <div className='course-hours'>{hours}hs</div>
@@ -69,7 +69,7 @@ const Course = props => {
         />
 
         <DependenciesHolder
-          text='P/ rendir final' 
+          text='P/ final'
           code={course.code}
           requiredState='A'
           isBlocked={isBlockedToSign(course)}
