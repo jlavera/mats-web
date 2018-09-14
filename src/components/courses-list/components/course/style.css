@@ -14,7 +14,7 @@
 }
 
 .course-holder-blocked {
-  opacity: 0.5;
+  border-style: dashed;
 }
 
 .course-name {
