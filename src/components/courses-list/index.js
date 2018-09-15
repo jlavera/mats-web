@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
-import { withRouter }       from 'react-router'
+import { withRouter }       from 'react-router';
 
 import { compose } from 'ramda';
 import { doGetCoursesForCareer, doChangeStateCourse } from './actions';

@@ -1,24 +1,16 @@
 import {
-  CAREERSLIST_REQUEST,
-  CAREERSLIST_SUCCESS,
-  CAREERSLIST_ERROR,
+  UPDATE_PREVIEW_MODE_ENABLED
 } from '../actions';
 
 const initialState = {
-  list:       [],
-  isFetching: false,
-  error:      '',
-  selected:   'K',
+  previewMode: false
 };
 
 export default function (state = initialState, action) {
+  console.log(state);
   switch (action.type) {
-    case CAREERSLIST_REQUEST:
-      return { ...state, isFetching: true, error: '', list: [] };
-    case CAREERSLIST_SUCCESS:
-      return { ...state, isFetching: false, list: action.payload.careers };
-    case CAREERSLIST_ERROR:
-      return { ...state, isFetching: false, list: action.payload.error };
+    case UPDATE_PREVIEW_MODE_ENABLED:
+      return { ...state, previewMode: action.payload.state };
     default:
       return state;
   }

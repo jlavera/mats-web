@@ -68,7 +68,6 @@ const StateSwitch = props => {
             <ReactTooltip id='dot-approved' type='dark'>
             <span>Aprobada</span>
             </ReactTooltip>
-
           </div>
       )}
     </div>

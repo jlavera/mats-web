@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
-import { doGetCareers }     from './actions';
-import { Career }           from './components';
+import { withRouter }       from 'react-router';
 import {
-  careersSelector,
-  isFetchingCareerSelector,
-  careersErrorSelector
+  isPreviewModeEnabledSelector
 } from './selectors';
+import { compose } from 'ramda';
+
+import { doUpdatePreviewModeEnabled } from './actions';
 
 import './style.css';
 
@@ -15,15 +15,11 @@ class TopBar extends Component {
     previewMode: false
   }
 
-  setPreviewMode = state => {
-    this.setState({ previewMode: state });
-  }
-
   render() {
     return (
       <div id='top-bar'>
         <label id='top-bar-switch'>
-          <input id='top-bar-input' type='checkbox' />
+          <input id='top-bar-input' type='checkbox' onClick={() => this.props.doUpdatePreviewModeEnabled(!this.state.previewMode)}/>
           <span id='top-bar-slider'></span>
         </label>
         Modo borrador (Los cambios no serán guardados)
@@ -32,4 +28,15 @@ class TopBar extends Component {
   }
 };
 
-export default TopBar;
+const actions = { doUpdatePreviewModeEnabled };
+
+const mapStateToProps = state => ({
+  previewMode: isPreviewModeEnabledSelector(state)
+});
+
+const enhance = compose(
+  withRouter,
+  connect(mapStateToProps, actions)
+);
+
+export default enhance(TopBar);
