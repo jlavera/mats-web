@@ -1,8 +1,13 @@
-import React from 'react'
-import { withRouter } from 'react-router'
+import React from 'react';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { func, shape, string } from 'prop-types';
+import { bool, func, shape, string } from 'prop-types';
 import ReactTooltip from 'react-tooltip';
+import {
+  isPreviewModeEnabledSelector
+} from '../../../../../../shared/selectors';
+import { compose } from 'ramda';
 
 import './style.css';
 
@@ -26,6 +31,7 @@ const StateSwitch = props => {
   const {
     course: { code, state },
     onChangeState,
+    previewMode,
     readMode
   } = props;
 
@@ -48,23 +54,25 @@ const StateSwitch = props => {
     'approved'
   ].concat(isSelected(isApproved, state), isNowState(state)));
 
+  const changeState = newState => onChangeState({[code]: newState}, previewMode);
+
   return (
     <div className='state-switch-holder'>
       {readMode ? (
           <div className={classNames(['status-read-mode', `status-read-mode-${state}`])}>{stateString(state)}</div>
         ) : (
           <div className={lineClass}>
-            <div data-tip data-for='dot-pending' className={pendingClass} onClick={() => onChangeState('P', code)} />
+            <div data-tip data-for='dot-pending' className={pendingClass} onClick={() => changeState('P')} />
             <ReactTooltip id='dot-pending' type='dark'>
             <span>Pendiente</span>
             </ReactTooltip>
 
-            <div data-tip data-for='dot-signed' className={signedClass} onClick={() => onChangeState('S', code)} />
+            <div data-tip data-for='dot-signed' className={signedClass} onClick={() => changeState('S')} />
             <ReactTooltip id='dot-signed' type='dark'>
             <span>Firmada</span>
             </ReactTooltip>
 
-            <div data-tip data-for='dot-approved' className={approvedClass} onClick={() => onChangeState('A', code)} />
+            <div data-tip data-for='dot-approved' className={approvedClass} onClick={() => changeState('A')} />
             <ReactTooltip id='dot-approved' type='dark'>
             <span>Aprobada</span>
             </ReactTooltip>
@@ -85,7 +93,18 @@ StateSwitch.propTypes = {
     code: string.isRequired,
     state: string
   }),
+  previewMode: bool.isRequired,
   onChangeState: func.isRequired,
+  readMode: bool
 };
 
-export default withRouter(StateSwitch);
+const mapStateToProps = state => ({
+  previewMode: isPreviewModeEnabledSelector(state)
+});
+
+const enhance = compose(
+  withRouter,
+  connect(mapStateToProps, {})
+);
+
+export default enhance(StateSwitch);

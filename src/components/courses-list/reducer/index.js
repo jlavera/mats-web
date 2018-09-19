@@ -5,13 +5,9 @@ import {
   COURSESLIST_REQUEST,
   COURSESLIST_SUCCESS,
   COURSESLIST_ERROR,
-  CHANGESTATE,
+  CHANGESTATES,
   UPDATESUCCESS
 } from '../actions';
-
-import {
-  UPDATE_PREVIEW_MODE_ENABLED
-} from '../../top-bar/actions';
 
 const initialState = {
   fixture:     [],
@@ -22,27 +18,33 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case UPDATE_PREVIEW_MODE_ENABLED:
-      return { ...state, previewMode: action.payload.state };
     case COURSESLIST_REQUEST:
       return { ...state, isFetching: true, error: null, fixture: [] };
     case COURSESLIST_SUCCESS:
       return { ...state, isFetching: false, fixture: action.payload.courses };
     case COURSESLIST_ERROR:
       return { ...state, isFetching: false, error: action.payload.error };
-    case CHANGESTATE:
-      const course = state.fixture.find(propEq('code', action.payload.code));
+    case CHANGESTATES:
+      const { changes, previewMode } = action.payload || {};
 
-      if (!course) return state;
+      if (!Object.keys(changes).length) return state;
 
-      const rest = reject(propEq('code', action.payload.code))(state.fixture);
-      const updatedCourse = { ...course, state: action.payload.state };
+      const newFixture = state.fixture
+        .slice()
+        .reduce((obj, course) => ({ ...obj, [course.code]: course }), {});
 
-      if (!state.previewMode) {
-        stateStorage.set(updatedCourse);
-      }
+      let updatedCourse;
+      Object.keys(changes).forEach(updatedCode => {
+        updatedCourse = { code: updatedCode, state: changes[updatedCode] };
 
-      return { ...state, fixture: [ updatedCourse, ...rest ] };
+        if (!previewMode) {
+          stateStorage.set(updatedCourse);
+        }
+
+        newFixture[updatedCourse.code].state = updatedCourse.state;
+      });
+
+      return { ...state, fixture: Object.values(newFixture)};
     case UPDATESUCCESS:
       // TODO show success dialog
       return state;

@@ -3,26 +3,22 @@ import { connect }          from 'react-redux';
 import { withRouter }       from 'react-router';
 import {
   isPreviewModeEnabledSelector
-} from './selectors';
+} from '../../shared/selectors';
 import { compose } from 'ramda';
 
-import { doUpdatePreviewModeEnabled } from './actions';
+import { doUpdatePreviewModeEnabled } from '../../shared/actions';
 
 import './style.css';
 
 class TopBar extends Component {
-  state = {
-    previewMode: false
-  }
-
   render() {
     return (
       <div id='top-bar'>
         <label id='top-bar-switch'>
-          <input id='top-bar-input' type='checkbox' onClick={() => this.props.doUpdatePreviewModeEnabled(!this.state.previewMode)}/>
+          <input id='top-bar-input' type='checkbox' onClick={() => this.props.doUpdatePreviewModeEnabled(!this.props.previewMode)}/>
           <span id='top-bar-slider'></span>
         </label>
-        Modo borrador (Los cambios no serán guardados)
+        <div id='top-bar-text'>Modo borrador (Los cambios no serán guardados)</div>
       </div>
     );
   }

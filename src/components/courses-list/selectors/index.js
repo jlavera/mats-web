@@ -13,21 +13,20 @@ const sortCourses = sortWith([
   compareByName,
 ]);
 
-export const coursesSelector = state => state.coursesList.fixture;
+const coursesSelector                  = state => state.coursesList.fixture;
 export const isFetchingCoursesSelector = state => state.coursesList.isFetching;
-export const loadedCoursesSelector = state => state.coursesList.loaded;
-export const coursesErrorSelector = state => state.coursesList.error;
+export const loadedCoursesSelector     = state => state.coursesList.loaded;
+export const coursesErrorSelector      = state => state.coursesList.error;
 
-// refactor me porfabor
-export const coursesWithDependenciesStatusSelector = createSelector(coursesSelector, courses => courses.map(course => ({
-  ...course, 
+const coursesWithDependenciesStatusSelector = createSelector(coursesSelector, courses => courses.map(course => ({
+  ...course,
   dependencies: {
     signed: course.dependencies.signed.map(code => courses.find(propEq('code', code))),
     approved: course.dependencies.approved.map(code => courses.find(propEq('code', code)))
   },
-  dependents: course.dependents.map(code => courses.find(propEq('code', code)))
+  dependents: course.dependents.map(code => courses[code])
 })));
 
-export const coursesByYearSelector = createSelector(coursesWithDependenciesStatusSelector, groupBy(prop('year')));
+const coursesByYearSelector = createSelector(coursesWithDependenciesStatusSelector, groupBy(prop('year')));
 
 export const sortedCoursesByYearSelector = createSelector(coursesByYearSelector, map(sortCourses));

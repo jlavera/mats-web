@@ -38,9 +38,7 @@ export const doGetCoursesForCareer = (careerCode, defaultState) => {
         // en realidad 30 y pico xd
         const initialState = Object.keys(defaultState).length ? defaultState : stateStorage.get();
 
-        Object.keys(initialState).forEach(key => {
-          dispatch(changeState(initialState[key], key));
-        });
+        dispatch(changeStates(initialState));
       })
       .catch(error => {
         dispatch(coursesListError(error.message));
@@ -49,23 +47,23 @@ export const doGetCoursesForCareer = (careerCode, defaultState) => {
   };
 };
 
-export const CHANGESTATE = 'CHANGESTATE';
+export const CHANGESTATES = 'CHANGESTATES';
 
-const changeState = (state, courseCode) => {
+const changeStates = (codesAndStates, previewMode) => {
   return {
-    type:    CHANGESTATE,
+    type:    CHANGESTATES,
     payload: {
-      state,
-      code: courseCode
+      changes: codesAndStates,
+      previewMode
     }
   };
 };
 
-export const doChangeStateCourse = (state, courseCode) => {
+export const doChangeStateCourses = (codesAndStates, previewMode) => {
   return dispatch => {
     // TODO kek get user
     // apiGateway.setStateToUser('1440135', courseCode, state);
-    dispatch(changeState(state, courseCode));
+    dispatch(changeStates(codesAndStates, previewMode));
   };
 }
 

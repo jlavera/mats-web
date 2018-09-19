@@ -3,13 +3,16 @@ import { connect }          from 'react-redux';
 import { withRouter }       from 'react-router';
 
 import { compose } from 'ramda';
-import { doGetCoursesForCareer, doChangeStateCourse } from './actions';
+import { doGetCoursesForCareer, doChangeStateCourses } from './actions';
 
 import { Year } from './components';
 
 import { formatWithStatusFromCommaSeparatedString } from './utils';
 import { isFetchingCoursesSelector, sortedCoursesByYearSelector } from './selectors';
 import { selectedCareerSelector } from '../careers-list/selectors';
+import {
+  isPreviewModeEnabledSelector
+} from '../../shared/selectors';
 import './style.css';
 
 class CoursesList extends Component {
@@ -37,7 +40,7 @@ class CoursesList extends Component {
       key={`year${year}`}
       year={+year}
       courses={courses}
-      onChangeState={this.props.doChangeStateCourse}
+      onChangeState={this.props.doChangeStateCourses}
       readMode={this.state.readMode}
     />
   )
@@ -66,7 +69,7 @@ const mapStateToProps = state => ({
   selectedCareer: selectedCareerSelector(state),
 });
 
-const actions = { doGetCoursesForCareer, doChangeStateCourse };
+const actions = { doGetCoursesForCareer, doChangeStateCourses };
 
 const enhance = compose(
   withRouter,
