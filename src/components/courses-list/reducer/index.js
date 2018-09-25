@@ -34,15 +34,18 @@ export default function (state = initialState, action) {
         .reduce((obj, course) => ({ ...obj, [course.code]: course }), {});
 
       let updatedCourse;
-      Object.keys(changes).forEach(updatedCode => {
-        updatedCourse = { code: updatedCode, state: changes[updatedCode] };
+      Object.keys(changes)
+        .filter(updatedCode => newFixture[updatedCode])
+        .forEach(updatedCode => {
+          updatedCourse = { code: updatedCode, state: changes[updatedCode] };
 
-        if (!previewMode) {
-          stateStorage.set(updatedCourse);
-        }
+          if (!previewMode) {
+            stateStorage.set(updatedCourse);
+          }
 
-        newFixture[updatedCourse.code].state = updatedCourse.state;
-      });
+          newFixture[updatedCourse.code].state = updatedCourse.state;
+        })
+      ;
 
       return { ...state, fixture: Object.values(newFixture)};
     case UPDATESUCCESS:
