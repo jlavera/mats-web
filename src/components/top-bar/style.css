@@ -1,4 +1,5 @@
 #top-bar-switch {
+  float: left;
   position: relative;
   display: inline-block;
   width: 60px;
@@ -49,6 +50,21 @@
   border-radius: 50%;
 }
 
-#top-bar-text {
-  
+.top-bar-text {
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  line-height: 34px;
+}
+
+.top-bar-text.active {
+  font-weight: bold;
+}
+
+.top-bar-text.inactive {
+  opacity: 0.5
+}
+
+.preview-info {
+  vertical-align: super;
 }
