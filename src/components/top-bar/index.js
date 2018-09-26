@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
-import { withRouter }       from 'react-router';
 import ReactTooltip         from 'react-tooltip';
 import {
   isPreviewModeEnabledSelector
@@ -9,6 +8,7 @@ import { compose } from 'ramda';
 import cx from 'classnames';
 
 import { doUpdatePreviewModeEnabled } from '../../shared/actions';
+import { withQueryParams } from '../utils';
 
 import './style.css';
 
@@ -16,7 +16,8 @@ class TopBar extends Component {
   render() {
     const {
       doUpdatePreviewModeEnabled,
-      previewMode
+      previewMode,
+      readMode
     } = this.props;
 
     const getClassName = active => cx(
@@ -24,7 +25,7 @@ class TopBar extends Component {
       active ? 'active' : 'inactive'
     );
 
-    return (
+    return readMode ? null : (
       <div id='top-bar'>
         <div className='top-bar-text'>Modo borrador: </div>
         <div className={getClassName(!previewMode)}>Descativado</div>
@@ -48,7 +49,7 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
-  withRouter,
+  withQueryParams,
   connect(mapStateToProps, actions)
 );
 
