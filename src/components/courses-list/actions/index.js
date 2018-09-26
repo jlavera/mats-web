@@ -33,12 +33,7 @@ export const doGetCoursesForCareer = (careerCode, defaultState) => {
         const { courses/* , optionals */} = career;
         dispatch(coursesListSuccess(careerCode, courses));
 
-        // cheesus TODO: pensar esto
-        // la cantidad de rerender que esta metiendo is over 9000
-        // en realidad 30 y pico xd
-        const initialState = Object.keys(defaultState).length ? defaultState : stateStorage.get();
-
-        dispatch(changeStates(initialState));
+        dispatch(Object.keys(defaultState).length ? doChangeStateCourses(defaultState, false) : doChangeStatesFromCookie(false));
       })
       .catch(error => {
         dispatch(coursesListError(error.message));
@@ -47,11 +42,11 @@ export const doGetCoursesForCareer = (careerCode, defaultState) => {
   };
 };
 
-export const CHANGESTATES = 'CHANGESTATES';
+export const CHANGE_STATES = 'CHANGE_STATES';
 
 const changeStates = (codesAndStates, previewMode) => {
   return {
-    type:    CHANGESTATES,
+    type:    CHANGE_STATES,
     payload: {
       changes: codesAndStates,
       previewMode
@@ -67,12 +62,19 @@ export const doChangeStateCourses = (codesAndStates, previewMode) => {
   };
 }
 
+export const CHANGE_STATES_FROM_COOKIE = 'CHANGE_STATES_FROM_COOKIE';
 
-export const UPDATESUCCESS = 'UPDATESUCCESS';
+export const doChangeStatesFromCookie = previewMode => {
+  return dispatch => {
+    dispatch(changeStates(stateStorage.get(), previewMode));
+  };
+};
+
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
 
 const updateSuccess = () => {
   return {
-    type:    UPDATESUCCESS,
+    type:    UPDATE_SUCCESS,
     payload: {}
   };
 };

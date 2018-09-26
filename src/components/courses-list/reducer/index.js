@@ -4,8 +4,8 @@ import {
   COURSESLIST_REQUEST,
   COURSESLIST_SUCCESS,
   COURSESLIST_ERROR,
-  CHANGESTATES,
-  UPDATESUCCESS
+  CHANGE_STATES,
+  UPDATE_SUCCESS
 } from '../actions';
 
 const initialState = {
@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
       return { ...state, isFetching: false, fixture: action.payload.courses };
     case COURSESLIST_ERROR:
       return { ...state, isFetching: false, error: action.payload.error };
-    case CHANGESTATES:
+    case CHANGE_STATES:
       const { changes, previewMode } = action.payload || {};
 
       if (!Object.keys(changes).length) return state;
@@ -47,7 +47,7 @@ export default function (state = initialState, action) {
       ;
 
       return { ...state, fixture: Object.values(newFixture)};
-    case UPDATESUCCESS:
+    case UPDATE_SUCCESS:
       // TODO show success dialog
       return state;
     default:

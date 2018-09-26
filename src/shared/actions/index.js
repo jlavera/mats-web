@@ -1,16 +1,22 @@
+import { doChangeStatesFromCookie } from '../../components/courses-list/actions';
+
 export const UPDATE_PREVIEW_MODE_ENABLED = 'UPDATE_PREVIEW_MODE_ENABLED';
 
-const updatePreviewModeEnabled = state => {
+const updatePreviewModeEnabled = previewEnabled => {
   return {
     type: UPDATE_PREVIEW_MODE_ENABLED,
     payload: {
-      state
+      state: previewEnabled
     }
   };
 };
 
-export const doUpdatePreviewModeEnabled = state => {
+export const doUpdatePreviewModeEnabled = previewEnabled => {
   return dispatch => {
-    dispatch(updatePreviewModeEnabled(state));
+    if (!previewEnabled) {
+      dispatch(doChangeStatesFromCookie(false));
+    }
+
+    dispatch(updatePreviewModeEnabled(previewEnabled));
   };
 };

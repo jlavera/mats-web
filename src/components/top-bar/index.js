@@ -30,7 +30,7 @@ class TopBar extends Component {
     return (
       <div id='top-bar'>
         <div className='top-bar-text'>Modo borrador: </div>
-        <div className={getClassName(!previewMode)}>Descativado</div>
+        <div className={getClassName(!previewMode)}>Desactivado</div>
         <label id='top-bar-switch'>
           <input id='top-bar-input' type='checkbox' onClick={() => doUpdatePreviewModeEnabled(!previewMode)}/>
           <span id='top-bar-slider'></span>
