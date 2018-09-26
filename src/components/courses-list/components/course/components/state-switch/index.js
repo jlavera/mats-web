@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { bool, func, shape, string } from 'prop-types';
@@ -7,6 +6,7 @@ import ReactTooltip from 'react-tooltip';
 import {
   isPreviewModeEnabledSelector
 } from '../../../../../../shared/selectors';
+import { withQueryParams } from '../../../../../utils';
 import { compose } from 'ramda';
 
 import './style.css';
@@ -94,8 +94,7 @@ StateSwitch.propTypes = {
     state: string
   }),
   previewMode: bool.isRequired,
-  onChangeState: func.isRequired,
-  readMode: bool
+  onChangeState: func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -103,7 +102,7 @@ const mapStateToProps = state => ({
 });
 
 const enhance = compose(
-  withRouter,
+  withQueryParams,
   connect(mapStateToProps, {})
 );
 

@@ -3,6 +3,7 @@ import { func, string, shape } from 'prop-types';
 import classNames from 'classnames';
 import ReactTooltip from 'react-tooltip';
 import { DependenciesHolder, StateSwitch } from './components';
+import { withQueryParams } from '../../../utils';
 import './style.css';
 
 const isBlockedToSign = course => {
@@ -35,7 +36,7 @@ const Course = props => {
 
   return (
     <div className={classNames(['course-holder', {'course-holder-blocked': isBlockedToSign(course)}, {'course-holder-read-mode': readMode}])}>
-     <StateSwitch course={course} onChangeState={onChangeState} readMode={readMode} />
+     <StateSwitch course={course} onChangeState={onChangeState} />
 
       <div className='course-name'>{name}</div>
       <div className='course-hours'>{hours}hs</div>
@@ -96,4 +97,4 @@ Course.propTypes = {
   onChangeState: func.isRequired,
 };
 
-export default Course;
+export default withQueryParams(Course);
