@@ -26,7 +26,9 @@ export default function (state = initialState, action) {
     case CHANGE_STATES:
       const { changes, previewMode } = action.payload || {};
 
-      if (!Object.keys(changes).length) return state;
+      if (!Object.keys(changes).length) {
+        return { ...state, fixture: state.fixture.map(course => ({ ...course, state: 'P' }))};
+      }
 
       const newFixture = state.fixture
         .slice()
