@@ -20,12 +20,14 @@ class TopBar extends Component {
       readMode
     } = this.props;
 
+    if (readMode) return null;
+
     const getClassName = active => cx(
       'top-bar-text',
       active ? 'active' : 'inactive'
     );
 
-    return readMode ? null : (
+    return (
       <div id='top-bar'>
         <div className='top-bar-text'>Modo borrador: </div>
         <div className={getClassName(!previewMode)}>Descativado</div>

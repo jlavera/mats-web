@@ -1,9 +1,9 @@
 import React          from 'react';
 import { withRouter } from 'react-router';
+import { omit }       from 'ramda';
 
 export default Component => withRouter(props => {
   const readMode             = props.location.query.readMode === 'true';
-  const { ...originalProps } = props;
 
-  return <Component readMode={readMode} {...originalProps}/>
+  return <Component readMode={readMode} {...omit(['router', 'location', 'routes'], props)}/>
 });

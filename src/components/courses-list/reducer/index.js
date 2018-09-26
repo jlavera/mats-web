@@ -1,4 +1,3 @@
-import { propEq, reject } from 'ramda';
 import * as stateStorage from '../../../services/stateStorage';
 
 import {

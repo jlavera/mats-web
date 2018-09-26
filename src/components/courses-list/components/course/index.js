@@ -3,7 +3,6 @@ import { func, string, shape } from 'prop-types';
 import classNames from 'classnames';
 import ReactTooltip from 'react-tooltip';
 import { DependenciesHolder, StateSwitch } from './components';
-import { compose } from 'ramda';
 import { withQueryParams } from '../../../utils';
 import './style.css';
 
@@ -98,8 +97,4 @@ Course.propTypes = {
   onChangeState: func.isRequired,
 };
 
-const enhance = compose(
-  withQueryParams
-);
-
-export default enhance(Course);
+export default withQueryParams(Course);
