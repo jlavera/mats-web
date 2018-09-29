@@ -3,7 +3,10 @@ import { withRouter } from 'react-router';
 import { omit }       from 'ramda';
 
 export default Component => withRouter(props => {
-  const readMode             = props.location.query.readMode === 'true';
+  const query    = props.location.query;
 
-  return <Component readMode={readMode} {...omit(['router', 'location', 'routes'], props)}/>
+  const readMode = query.readMode === 'true';
+  const fromSiga = query.source === 'siga';
+
+  return <Component readMode={readMode} fromSiga={fromSiga} {...omit(['router', 'location', 'routes'], props)}/>
 });
