@@ -17,8 +17,7 @@ class TopBar extends Component {
     const {
       doUpdatePreviewModeEnabled,
       previewMode,
-      readMode,
-      fromSiga
+      readMode
     } = this.props;
 
     const getClassName = active => cx(
@@ -40,7 +39,7 @@ class TopBar extends Component {
             <span>Los cambios en modo borrador no se guardarán y al desactivarlo se volverá al último estado guardado.</span>
           </ReactTooltip>
         </div>
-        <div id='go-page-button' className={ !(fromSiga && readMode) ? 'hidden' : ''}>
+        <div id='go-page-button' className={ !readMode ? 'hidden' : ''}>
           <a href='http://www.materiasutn.com' target='_blank'>
             <div id='go-page-button-text'>
               Ver completo <i className='fa fa-external-link-alt' />
