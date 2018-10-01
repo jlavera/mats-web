@@ -35,7 +35,7 @@ class TopBar extends Component {
             <span id='top-bar-slider'></span>
           </label>
           <div className={getClassName(previewMode)}>Activado <i data-tip data-for='preview-info-tooltip' className='preview-info fa fa-question-circle'></i></div>
-          <ReactTooltip id='preview-info-tooltip' type='dark'>
+          <ReactTooltip id='preview-info-tooltip' type='dark' place='left'>
             <span>Los cambios en modo borrador no se guardarán y al desactivarlo se volverá al último estado guardado.</span>
           </ReactTooltip>
         </div>

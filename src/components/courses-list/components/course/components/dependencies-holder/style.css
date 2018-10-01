@@ -33,6 +33,23 @@
   background: #5DC178;
 }
 
+.dependencies-circle {
+	font-size: 150px;
+	color: #e00;
+  animation-name: beat;
+  animation-duration: .25s;
+  animation-timing-function: linear;
+  animation-delay: .5s;
+  animation-iteration-count: 4;
+  animation-direction: alternate;
+	transform-origin: center;
+}
+
+/* Heart beat animation */
+@keyframes beat{
+	to { transform: scale(1.2); }
+}
+
 .dependencies-holder-text {
   display: inline-block;
   vertical-align: middle;

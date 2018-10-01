@@ -60,6 +60,7 @@ const DependenciesHolder = props => {
   const legend = `${text} ${totalSum === 0 ? '-' : `${actualSum}/${totalSum}`}`;
 
   const circleClassname = cx(
+    'dependencies-circle',
     { 'gray-circle': isBlocked },
     { 'yellow-circle': actualSum !== totalSum && !isBlocked },
     { 'green-circle': actualSum === totalSum },
