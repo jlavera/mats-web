@@ -1,19 +1,19 @@
 .state-switch-holder {
-  margin-left: 25px;
+  margin-left: 12.5px;
 }
 
 
 .line {
   position: relative;
 
-  width: 250px;
-  height: 10px;
+  width: 175px;
+  height: 5px;
 
   border-radius: 100px;
 }
 
 .line-read-mode {
-  width: 200px;
+  width: 175px;
 }
 
 
@@ -24,17 +24,15 @@
 
   border-radius: 50%;
 
-  width: 30px;
-  height: 30px;
-
-  top: -100%;
+  width: 20px;
+  height: 20px;
 
   cursor: pointer;
 }
 .dot.non-selected:hover {
-  -webkit-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  transform: scale(1.2);
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
   transform-origin: center;
 }
 .dot.selected {
@@ -43,12 +41,15 @@
 
 
 .dot.pending {
+  top: -150%;
   float: left;
 }
 .dot.signed {
+  top: -300%;
   display: inline-block;
 }
 .dot.approved {
+  top: -150%;
   float: right;
 }
 

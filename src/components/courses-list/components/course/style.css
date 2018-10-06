@@ -1,8 +1,8 @@
 .course-holder {
-  padding: 25px 15px 0px 15px;
+  padding: 15px 10px 0px 10px;
   border: 2px solid #C4C4C4;
   text-align: center;
-  width: 300px;
+  width: 200px;
   border-radius: 10px;
   margin-bottom: 5px;
   position: relative;
@@ -10,7 +10,7 @@
 
 .course-holder-read-mode {
   padding-top: 0;
-  width: 250px;
+  width: 200px;
 }
 
 .course-holder-blocked {
@@ -43,7 +43,7 @@
   position: absolute;
   right: 2%;
   top: 5%;
-  font-size: medium;
+  font-size: small;
 }
 
 .course-lock {
