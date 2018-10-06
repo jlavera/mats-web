@@ -4,37 +4,25 @@
 }
 
 .gray-circle {
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-
-  border-radius: 50px;
-  vertical-align: middle;
   background: #B6B6B6;
 }
 
 .yellow-circle {
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-
-  border-radius: 50px;
-  vertical-align: middle;
   background: #FFDF3A;
 }
 
 .green-circle {
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-
-  border-radius: 50px;
-  vertical-align: middle;
   background: #5DC178;
 }
 
 .dependencies-circle {
-	font-size: 150px;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50px;
+  vertical-align: middle;
+
+  font-size: 150px;
 	color: #e00;
   animation-name: beat;
   animation-duration: .25s;
