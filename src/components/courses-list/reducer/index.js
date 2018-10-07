@@ -1,5 +1,4 @@
 import * as stateStorage from '../../../services/stateStorage';
-
 import {
   COURSESLIST_REQUEST,
   COURSESLIST_SUCCESS,
@@ -7,6 +6,8 @@ import {
   CHANGE_STATES,
   UPDATE_SUCCESS
 } from '../actions';
+
+import { times } from 'ramda';
 
 const initialState = {
   fixture:     [],
@@ -20,7 +21,13 @@ export default function (state = initialState, action) {
     case COURSESLIST_REQUEST:
       return { ...state, isFetching: true, error: null, fixture: [] };
     case COURSESLIST_SUCCESS:
-      return { ...state, isFetching: false, fixture: action.payload.courses };
+      const { courses, optionals } = action.payload;
+
+      optionals.forEach(year => {
+        times(index => courses.push({ ...year.course, code: `opt-${year.year}-${index}`, options: year.options }), year.required);
+      })
+
+      return { ...state, isFetching: false, fixture: courses };
     case COURSESLIST_ERROR:
       return { ...state, isFetching: false, error: action.payload.error };
     case CHANGE_STATES:

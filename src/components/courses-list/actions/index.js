@@ -9,11 +9,12 @@ const coursesListRequest = () => ({
   type: COURSESLIST_REQUEST
 });
 
-const coursesListSuccess = (careerCode, courses, tree) => ({
+const coursesListSuccess = (careerCode, courses, optionals) => ({
   type: COURSESLIST_SUCCESS,
   payload: {
     careerCode,
     courses,
+    optionals
   }
 });
 
@@ -30,8 +31,10 @@ export const doGetCoursesForCareer = (careerCode, defaultState) => {
 
     return apiGateway.getCareer(careerCode)
       .then(career => {
-        const { courses/* , optionals */} = career;
-        dispatch(coursesListSuccess(careerCode, courses));
+        const { courses, optionals } = career;
+        const _optionals = [optionals[0]];
+
+        dispatch(coursesListSuccess(careerCode, courses, _optionals));
 
         dispatch(Object.keys(defaultState).length ? doChangeStateCourses(defaultState, false) : doChangeStatesFromCookie(false));
       })
@@ -72,9 +75,9 @@ export const doChangeStatesFromCookie = previewMode => {
 
 export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
 
-const updateSuccess = () => {
-  return {
-    type:    UPDATE_SUCCESS,
-    payload: {}
-  };
-};
+// const updateSuccess = () => {
+//   return {
+//     type:    UPDATE_SUCCESS,
+//     payload: {}
+//   };
+// };

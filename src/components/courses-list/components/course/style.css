@@ -17,16 +17,22 @@
   border-width: thin;
 }
 
-.course-name {
+.course-name-holder {
   float: left;
+  width: 85%;
+  color: #171717;
+  margin: 5px 0px 5px 0px;
+  font-size: 15px;
+}
+
+.course-name {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
 
-  width: 90%;
-  color: #171717;
-  margin: 5px 0px 5px 0px;
-  font-size: 20px;
+.course-name-selector {
+
 }
 
 .course-hours {
@@ -56,4 +62,8 @@
 
 .course-lock.show, .course-exclamation.show {
   display: block;
+}
+
+.course-dependencies-holder {
+  margin-top: -10px;
 }

@@ -40,7 +40,7 @@ class TopBar extends Component {
           </ReactTooltip>
         </div>
         <div id='go-page-button' className={ !readMode ? 'hidden' : ''}>
-          <a href='http://www.materiasutn.com' target='_blank'>
+          <a href='http://www.materiasutn.com' target='_blank' rel='noopener noreferrer'>
             <div id='go-page-button-text'>
               Ver completo <i className='fa fa-external-link-alt' />
             </div>

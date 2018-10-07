@@ -24,7 +24,7 @@ const DependenciesHolder = props => {
       <b>Cursadas:</b>
       <ul className='dependencies-list-tooltip'>
         { signed.map(course => (
-          <li className={cx('dependency', {'dependency-crossed': isSigned(course.state)})}>{ course.name }</li>
+          <li key={`${code}-${course.code}-S`} className={cx('dependency', {'dependency-crossed': isSigned(course.state)})}>{ course.name }</li>
         )) }
       </ul>
     </Fragment>
@@ -35,7 +35,7 @@ const DependenciesHolder = props => {
       <b>Aprobadas:</b>
       <ul className='dependencies-list-tooltip'>
         { approved.map(course => (
-          <li className={cx('dependency', {'dependency-crossed': isApproved(course.state)})}>{ course.name }</li>
+          <li key={`${code}-${course.code}-A`} className={cx('dependency', {'dependency-crossed': isApproved(course.state)})}>{ course.name }</li>
         )) }
       </ul>
     </Fragment>

@@ -4,6 +4,6 @@ export default shape({
   code: string.isRequired,
   duration: string.isRequired,
   main: bool.isRequired,
-  name: string.isRequired,
+  name: string,
   optative: bool.isRequired,
 });

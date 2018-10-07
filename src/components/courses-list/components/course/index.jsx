@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { func, string, shape } from 'prop-types';
 import classNames from 'classnames';
 import ReactTooltip from 'react-tooltip';
-import { DependenciesHolder, StateSwitch } from './components';
+import { DependenciesHolder, OptativeDropDown, StateSwitch } from './components';
 import { withQueryParams } from '../../../utils';
 import './style.css';
 
@@ -18,17 +18,7 @@ const isBlockedToApprove = course => {
     approved.some(dep => dep.state !== 'A');
 }
 
-const hasDepsToSign = course => !!course.dependencies.signed.length;
-
-const hasDepsToApprove = course => !!course.dependencies.approved.length;
-
-const hasDependencies = course => hasDepsToSign(course) || hasDepsToApprove(course);
-
-const isPending = course => !course.state || course.state === 'N';
-
-const isSigned = course => course.state === 'S';
-
-const isApproved = course => course.state === 'A';
+const isOptative = course => !!course.optative;
 
 const Course = props => {
   const { course, onChangeState, readMode } = props;
@@ -38,7 +28,9 @@ const Course = props => {
     <div className={classNames(['course-holder', {'course-holder-blocked': isBlockedToSign(course)}, {'course-holder-read-mode': readMode}])}>
      <StateSwitch course={course} onChangeState={onChangeState} />
 
-      <div className='course-name'>{name}</div>
+      {isOptative(course) ?
+        <div className='course-name-holder course-name-selector'><OptativeDropDown options={course.options} year={course.year} index={0} /></div> : <div className='course-name-holder course-name'>{name}</div>
+      }
       <div className='course-hours'>{hours}hs</div>
 
       {isBlockedToSign(course) &&
@@ -59,7 +51,7 @@ const Course = props => {
         </Fragment>
       }
 
-      <div>
+      <div className='course-dependencies-holder'>
         <DependenciesHolder
           text='P/ cursar'
           code={course.code}
@@ -91,7 +83,7 @@ Course.defaultProps = {
 Course.propTypes = {
   course: shape({
     hours: string.isRequired,
-    name: string.isRequired,
+    name: string,
     state: string,
   }).isRequired,
   onChangeState: func.isRequired,
