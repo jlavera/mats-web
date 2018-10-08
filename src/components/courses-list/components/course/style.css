@@ -67,3 +67,28 @@
 .course-dependencies-holder {
   margin-top: -10px;
 }
+
+.optionals-select__control {
+  width: 85%;
+  font-size: 12px;
+  float: left;
+  min-height: 0px !important;
+  border: none !important;
+  border-bottom: 1px solid #DDD !important;
+}
+
+.optionals-select__placeholder {
+  margin: 0 !important;
+}
+
+.optionals-select__menu {
+  font-size: 12px;
+}
+
+.optionals-select__indicators {
+  display: none !important;
+}
+
+.optionals-select__single-value {
+  text-align: center;
+}

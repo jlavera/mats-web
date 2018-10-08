@@ -3,8 +3,9 @@ import { func, string, shape } from 'prop-types';
 import classNames from 'classnames';
 import ReactTooltip from 'react-tooltip';
 import { prop, sortBy } from 'ramda';
+import Select from 'react-select';
 
-import { DependenciesHolder, OptativeDropDown, StateSwitch } from './components';
+import { DependenciesHolder, StateSwitch } from './components';
 import { withQueryParams } from '../../../utils';
 import './style.css';
 
@@ -31,7 +32,24 @@ const Course = props => {
      <StateSwitch course={course} onChangeState={onChangeState} />
 
       {isOptative(course) ?
-        <div className='course-name-holder course-name-selector'><OptativeDropDown options={sortBy(prop('name'), course.options)} year={course.year} index={0} /></div> : <div className='course-name-holder course-name'>{name}</div>
+        <Select
+          placeholder='Seleccionar materia'
+          className = 'basic-single'
+          classNamePrefix = 'optionals-select'
+          isDisabled = {false}
+          isLoading = {false}
+          isClearable = {false}
+          isRtl = {false}
+          isSearchable = {true}
+          name = 'options'
+          options = {
+            sortBy(prop('name'), course.options)
+              .map(option => ({
+                value: option.code,
+                label: option.name
+              }))
+          }
+        /> : <div className='course-name-holder course-name'>{name}</div>
       }
       <div className='course-hours'>{hours}hs</div>
 
