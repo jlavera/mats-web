@@ -19,7 +19,9 @@ class OptativeDropDown extends Component {
 
   renderListItems(options, year, index) {
     return options
-      .map((option, optIndex) => (<div className='dropdown-item' key={`${year}-${index}-${optIndex}-${option.code}`} onClick={ this.select.bind(this, option) }>{ option.name }</div>));
+      .map((option, optIndex) => (
+        <div className='dropdown-item' key={`${year}-${index}-${optIndex}-${option.code}`} onClick={ this.select.bind(this, option) }>{ option.name }</div>
+      ));
   };
 
   render() {
@@ -31,12 +33,13 @@ class OptativeDropDown extends Component {
 
     return (
       <div className={'dropdown-container' + (this.state.listVisible ? ' show' : '')}>
-        <div className={'dropdown-display' + (this.state.listVisible ? ' clicked': '')} onClick={ this.toggleShow.bind(this) }>
+        <div className={'dropdown-display' + (this.state.listVisible ? ' clicked': '')}
+          onClick={ this.toggleShow.bind(this) }
+          onBlur={ this.toggleShow.bind(this) }>
           <div className='selected-name'>{ this.state.selected ? this.state.selected.name : 'Seleccionar materia' }</div>
-          <i className='fa fa-angle-down'></i>
         </div>
         <div className={'dropdown-list' + (this.state.listVisible ? ' show' : ' hide')}>
-          <div>
+          <div className='dropdown-list-items'>
             { this.renderListItems(options, year, index) }
           </div>
         </div>

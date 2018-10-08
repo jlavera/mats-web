@@ -32,9 +32,8 @@ export const doGetCoursesForCareer = (careerCode, defaultState) => {
     return apiGateway.getCareer(careerCode)
       .then(career => {
         const { courses, optionals } = career;
-        const _optionals = [optionals[0]];
 
-        dispatch(coursesListSuccess(careerCode, courses, _optionals));
+        dispatch(coursesListSuccess(careerCode, courses, optionals));
 
         dispatch(Object.keys(defaultState).length ? doChangeStateCourses(defaultState, false) : doChangeStatesFromCookie(false));
       })
