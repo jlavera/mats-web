@@ -27,28 +27,29 @@ const Course = props => {
   const { course, onChangeState, readMode } = props;
   const { hours, name }                     = course;
 
+  const options = sortBy(prop('name'), course.options || [])
+    .map(option => ({
+      value: option.code,
+      label: option.name
+    }));
+
   return (
     <div className={classNames(['course-holder', {'course-holder-blocked': isBlockedToSign(course)}, {'course-holder-read-mode': readMode}])}>
      <StateSwitch course={course} onChangeState={onChangeState} />
 
-      {isOptative(course) ?
+      { isOptative(course) ?
         <Select
+          value={ options[0] }
           placeholder='Seleccionar materia'
           className = 'basic-single'
           classNamePrefix = 'optionals-select'
-          isDisabled = {false}
-          isLoading = {false}
-          isClearable = {false}
-          isRtl = {false}
-          isSearchable = {true}
+          isDisabled = { false }
+          isLoading = { false }
+          isClearable = { false }
+          isRtl = { false }
+          isSearchable = { true }
           name = 'options'
-          options = {
-            sortBy(prop('name'), course.options)
-              .map(option => ({
-                value: option.code,
-                label: option.name
-              }))
-          }
+          options = { options }
         /> : <div className='course-name-holder course-name'>{name}</div>
       }
       <div className='course-hours'>{hours}hs</div>

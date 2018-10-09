@@ -75,6 +75,7 @@
   min-height: 0px !important;
   border: none !important;
   border-bottom: 1px solid #DDD !important;
+  cursor: pointer !important;
 }
 
 .optionals-select__placeholder {
