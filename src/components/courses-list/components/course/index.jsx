@@ -24,8 +24,13 @@ const isBlockedToApprove = course => {
 const isOptative = course => !!course.optative;
 
 const Course = props => {
-  const { course, onChangeState, readMode } = props;
-  const { hours, name }                     = course;
+  const {
+    course,
+    onChangeState,
+    selectedOptional,
+    readMode
+  }                     = props;
+  const { hours, name } = course;
 
   const options = sortBy(prop('name'), course.options || [])
     .map(option => ({
@@ -35,11 +40,13 @@ const Course = props => {
 
   return (
     <div className={classNames(['course-holder', {'course-holder-blocked': isBlockedToSign(course)}, {'course-holder-read-mode': readMode}])}>
-     <StateSwitch course={course} onChangeState={onChangeState} />
+      <StateSwitch
+        course={ course }
+        onChangeState={ onChangeState } />
 
       { isOptative(course) ?
         <Select
-          value={ options[0] }
+          value={ selectedOptional }
           placeholder='Seleccionar materia'
           className = 'basic-single'
           classNamePrefix = 'optionals-select'
@@ -50,7 +57,7 @@ const Course = props => {
           isSearchable = { true }
           name = 'options'
           options = { options }
-        /> : <div className='course-name-holder course-name'>{name}</div>
+        /> : <div className='course-name-holder course-name'>{ name }</div>
       }
       <div className='course-hours'>{hours}hs</div>
 

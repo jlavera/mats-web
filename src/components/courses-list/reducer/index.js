@@ -24,7 +24,7 @@ export default function (state = initialState, action) {
       const { courses, optionals } = action.payload;
 
       optionals.forEach(year => {
-        times(index => courses.push({ ...year.course, code: `opt-${year.year}-${index}`, options: year.options }), year.required);
+        times(index => courses.push({ ...year.course, code: '', options: year.options }), year.required);
       })
 
       return { ...state, isFetching: false, fixture: courses };

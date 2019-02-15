@@ -29,7 +29,10 @@ const stateString = state => isApproved(state) ? 'Aprobada' : isSigned(state) ? 
 
 const StateSwitch = props => {
   const {
-    course: { code, state },
+    course: { 
+      code,
+      state
+    },
     onChangeState,
     previewMode,
     readMode
@@ -58,8 +61,8 @@ const StateSwitch = props => {
 
   return (
     <div className='state-switch-holder'>
-      {readMode ? (
-          <div className={classNames(['status-read-mode', `status-read-mode-${state}`])}>{stateString(state)}</div>
+      { readMode ? (
+          <div className={classNames(['status-read-mode', `status-read-mode-${state}`])}>{ stateString(state) }</div>
         ) : (
           <div className={lineClass}>
             <div data-tip data-for='dot-pending' className={pendingClass} onClick={() => changeState('P')} />
