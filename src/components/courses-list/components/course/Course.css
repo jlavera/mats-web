@@ -1,6 +1,6 @@
 .course-holder {
   padding: 15px 10px 0px 10px;
-  border: 2px solid #C4C4C4;
+  border: 2px solid #c4c4c4;
   text-align: center;
   width: 200px;
   border-radius: 10px;
@@ -39,7 +39,8 @@
   font-size: 10px;
 }
 
-.course-lock, .course-exclamation {
+.course-lock,
+.course-exclamation {
   position: absolute;
   right: 2%;
   top: 5%;
@@ -54,6 +55,7 @@
   color: orange;
 }
 
-.course-lock.show, .course-exclamation.show {
+.course-lock.show,
+.course-exclamation.show {
   display: block;
 }
