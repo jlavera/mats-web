@@ -2,7 +2,6 @@
   margin-left: 12.5px;
 }
 
-
 .line {
   position: relative;
 
@@ -15,7 +14,6 @@
 .line-read-mode {
   width: 175px;
 }
-
 
 .dot {
   position: relative;
@@ -39,7 +37,6 @@
   transform: scale(1.5);
 }
 
-
 .dot.pending {
   top: -150%;
   float: left;
@@ -53,17 +50,15 @@
   float: right;
 }
 
-
 .now-pending {
-  background: #E9E9E9;
+  background: #e9e9e9;
 }
 .now-signed {
-  background: #FFDF3A;
+  background: #ffdf3a;
 }
 .now-approved {
-  background: #5DC178;
+  background: #5dc178;
 }
-
 
 .status-read-mode {
   font-size: 15px;
