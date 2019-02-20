@@ -1,7 +1,7 @@
 import React from 'react';
 import { Year } from './components';
 
-import './style.css';
+import './CoursesList.css';
 
 const CoursesList = ({ readMode, isFetching, list, doChangeStateCourses }) => (
   <div className="years-holder">

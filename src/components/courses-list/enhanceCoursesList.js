@@ -6,12 +6,12 @@ import {
   isFetchingCoursesSelector,
   sortedCoursesByYearSelector
 } from './selectors';
-// import { selectedCareerSelector } from './selectors';
 
 import { doGetCoursesForCareer, doChangeStateCourses } from './actions';
 import { withQueryParams } from '../utils';
 import { formatWithStatusFromCommaSeparatedString } from './utils';
 
+// import { selectedCareerSelector } from './selectors';
 const selectedCareerSelector = () => 'K';
 
 const enhanceCoursesList = CoursesListComponent => {
