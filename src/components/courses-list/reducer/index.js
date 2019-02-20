@@ -9,13 +9,13 @@ import {
 } from '../actions';
 
 const initialState = {
-  fixture:     [],
-  isFetching:  false,
-  error:       null,
+  fixture: [],
+  isFetching: false,
+  error: null,
   previewMode: false
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case COURSESLIST_REQUEST:
       return { ...state, isFetching: true, error: null, fixture: [] };
@@ -27,7 +27,10 @@ export default function (state = initialState, action) {
       const { changes, previewMode } = action.payload || {};
 
       if (!Object.keys(changes).length) {
-        return { ...state, fixture: state.fixture.map(course => ({ ...course, state: 'P' }))};
+        return {
+          ...state,
+          fixture: state.fixture.map(course => ({ ...course, state: 'P' }))
+        };
       }
 
       const newFixture = state.fixture
@@ -45,10 +48,9 @@ export default function (state = initialState, action) {
           }
 
           newFixture[updatedCourse.code].state = updatedCourse.state;
-        })
-      ;
+        });
 
-      return { ...state, fixture: Object.values(newFixture)};
+      return { ...state, fixture: Object.values(newFixture) };
     case UPDATE_SUCCESS:
       // TODO show success dialog
       return state;
