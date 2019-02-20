@@ -4,15 +4,15 @@
 }
 
 .gray-circle {
-  background: #B6B6B6;
+  background: #b6b6b6;
 }
 
 .yellow-circle {
-  background: #FFDF3A;
+  background: #ffdf3a;
 }
 
 .green-circle {
-  background: #5DC178;
+  background: #5dc178;
 }
 
 .dependencies-circle {
@@ -23,19 +23,21 @@
   vertical-align: middle;
 
   font-size: 150px;
-	color: #e00;
+  color: #e00;
   animation-name: beat;
-  animation-duration: .25s;
+  animation-duration: 0.25s;
   animation-timing-function: linear;
-  animation-delay: .5s;
+  animation-delay: 0.5s;
   animation-iteration-count: 4;
   animation-direction: alternate;
-	transform-origin: center;
+  transform-origin: center;
 }
 
 /* Heart beat animation */
-@keyframes beat{
-	to { transform: scale(1.2); }
+@keyframes beat {
+  to {
+    transform: scale(1.2);
+  }
 }
 
 .dependencies-holder-text {
@@ -43,7 +45,7 @@
   vertical-align: middle;
   margin-left: 5px;
   font-size: 12px;
-  color: #C4C4C4;
+  color: #c4c4c4;
 }
 
 .dependencies-list-tooltip {
