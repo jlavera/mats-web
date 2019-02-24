@@ -75,8 +75,8 @@ const Course = ({ course, onChangeState, readMode }) => {
           code={course.code}
           requiredState="S"
           isBlocked={isBlockedToSign(course)}
-          signed={course.dependencies.signed}
-          approved={course.dependencies.approved}
+          hasToBeSignedList={course.dependencies.signed}
+          hasToBeApprovedList={course.dependencies.approved}
         />
 
         <DependenciesHolder
@@ -84,8 +84,8 @@ const Course = ({ course, onChangeState, readMode }) => {
           code={course.code}
           requiredState="A"
           isBlocked={isBlockedToSign(course)}
-          signed={[]}
-          approved={[
+          hasToBeSignedList={[]}
+          hasToBeApprovedList={[
             ...course.dependencies.signed,
             ...course.dependencies.approved
           ]}

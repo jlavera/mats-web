@@ -4,16 +4,18 @@ import ReactTooltip from 'react-tooltip';
 import cx from 'classnames';
 import './DependenciesHolder.css';
 
-const isSignedOrApproved = state => state === 'S' || state === 'A';
-const isApproved = state => state === 'A';
+const isSignedOrApproved = course =>
+  course.state === 'S' || course.state === 'A';
+
+const isApproved = course => course.state === 'A';
 
 const DependenciesHolder = ({
   code,
   requiredState,
   text,
   isBlocked,
-  signed,
-  approved
+  hasToBeSignedList,
+  hasToBeApprovedList
 }) => {
   const tooltipId = `course-${code}-${requiredState}-tooltip`;
 
@@ -21,10 +23,10 @@ const DependenciesHolder = ({
     <Fragment>
       <b>Cursadas:</b>
       <ul className="dependencies-list-tooltip">
-        {signed.map(course => (
+        {hasToBeSignedList.map(course => (
           <li
             className={cx('dependency', {
-              'dependency-crossed': isSignedOrApproved(course.state)
+              'dependency-crossed': isSignedOrApproved(course)
             })}
           >
             {course.name}
@@ -38,10 +40,10 @@ const DependenciesHolder = ({
     <Fragment>
       <b>Aprobadas:</b>
       <ul className="dependencies-list-tooltip">
-        {approved.map(course => (
+        {hasToBeApprovedList.map(course => (
           <li
             className={cx('dependency', {
-              'dependency-crossed': isApproved(course.state)
+              'dependency-crossed': isApproved(course)
             })}
           >
             {course.name}
@@ -53,28 +55,35 @@ const DependenciesHolder = ({
 
   const dependenciesList = (
     <Fragment>
-      {signed.length !== 0 && signedList}
-      {approved.length !== 0 && approvedList}
+      {hasToBeSignedList.length !== 0 && signedList}
+      {hasToBeApprovedList.length !== 0 && approvedList}
     </Fragment>
   );
 
-  const actualSignedCount = signed.filter(c => isSignedOrApproved(c.state))
-    .length;
-  const actualApprovedCount = approved.filter(c => isApproved(c.state)).length;
+  const actualSignedCount = hasToBeSignedList.filter(isSignedOrApproved).length;
+  const actualApprovedCount = hasToBeApprovedList.filter(isApproved).length;
 
-  const totalSignedRequired = signed.length;
-  const totalApprovedRequired = approved.length;
+  const totalSignedRequired = hasToBeSignedList.length;
+  const totalApprovedRequired = hasToBeApprovedList.length;
 
-  const actualSum = actualSignedCount + actualApprovedCount;
-  const totalSum = totalSignedRequired + totalApprovedRequired;
+  const metRequirementsSum = actualSignedCount + actualApprovedCount;
+  const totalRequirementsSum = totalSignedRequired + totalApprovedRequired;
 
-  const legend = `${text} ${totalSum === 0 ? '-' : `${actualSum}/${totalSum}`}`;
+  const courseHasAnyRequirements = totalRequirementsSum !== 0;
+
+  const legend = `${text} ${
+    courseHasAnyRequirements
+      ? `${metRequirementsSum}/${totalRequirementsSum}`
+      : '-'
+  }`;
 
   const circleClassname = cx(
     'dependencies-circle',
     { 'gray-circle': isBlocked },
-    { 'yellow-circle': actualSum !== totalSum && !isBlocked },
-    { 'green-circle': actualSum === totalSum }
+    {
+      'yellow-circle': metRequirementsSum !== totalRequirementsSum && !isBlocked
+    },
+    { 'green-circle': metRequirementsSum === totalRequirementsSum }
   );
 
   return (
@@ -85,7 +94,7 @@ const DependenciesHolder = ({
         aria-haspopup="true"
         className={circleClassname}
       />
-      {signed.length + approved.length !== 0 && (
+      {courseHasAnyRequirements && (
         <ReactTooltip id={tooltipId} type="dark">
           {dependenciesList}
         </ReactTooltip>
@@ -98,13 +107,13 @@ const DependenciesHolder = ({
 DependenciesHolder.propTypes = {
   text: string.isRequired,
   requiredState: string.isRequired,
-  approved: arrayOf(
+  hasToBeApprovedList: arrayOf(
     shape({
       name: string.isRequired,
       code: string.isRequired
     })
   ),
-  signed: arrayOf(
+  hasToBeSignedList: arrayOf(
     shape({
       name: string.isRequired,
       code: string.isRequired
