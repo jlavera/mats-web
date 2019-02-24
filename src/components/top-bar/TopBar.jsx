@@ -48,7 +48,11 @@ const TopBar = ({ doUpdatePreviewModeEnabled, previewMode, readMode }) => {
         </ReactTooltip>
       </div>
       <div id="go-page-button" className={hiddenIfNotReadmodeCx}>
-        <a href="http://www.materiasutn.com" target="_blank">
+        <a
+          href="http://www.materiasutn.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <div id="go-page-button-text">
             Ver completo <i className="fa fa-external-link-alt" />
           </div>
