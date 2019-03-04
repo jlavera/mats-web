@@ -1,3 +1,4 @@
+import ReactDOM             from 'react-dom';
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 import ReactTooltip         from 'react-tooltip';
@@ -13,6 +14,11 @@ import { withQueryParams } from '../utils';
 import './style.css';
 
 class TopBar extends Component {
+  componentDidMount() {
+    ReactDOM.findDOMNode(this.refs.signin)
+      .setAttribute('data-onsuccess', this.onSignIn);
+  }
+
   render() {
     const {
       doUpdatePreviewModeEnabled,
@@ -28,8 +34,8 @@ class TopBar extends Component {
     return (
       <div id='top-bar'>
         <div id='google-sign-in' className={ readMode ? 'hidden' : ''}>
-          <div className='g-signin2' data-onsuccess={(user) => onSignIn(user)}></div>
-          <a href='#' onClick={signOut}>Sign out</a>
+          <div className='g-signin2' ref="signin"></div>
+          <a href='#' onClick={this.signOut}>Sign out</a>
         </div>
         <div id='preview-switch' className={ readMode ? 'hidden' : ''}>
           <div className='top-bar-text'>Modo borrador: </div>
@@ -53,6 +59,22 @@ class TopBar extends Component {
       </div>
     );
   }
+
+  onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  }
+
+  signOut() {
+    gapi.auth2.getAuthInstance() // eslint-disable-line no-undef
+      .signOut()
+      .then(function () {
+        console.log('User signed out.');
+    });
+  }
 };
 
 const actions = { doUpdatePreviewModeEnabled };
@@ -65,21 +87,5 @@ const enhance = compose(
   withQueryParams,
   connect(mapStateToProps, actions)
 );
-
-function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-}
-
-function signOut() {
-  gapi.auth2.getAuthInstance() // eslint-disable-line no-undef
-    .signOut()
-    .then(function () {
-      console.log('User signed out.');
-  });
-}
 
 export default enhance(TopBar);
