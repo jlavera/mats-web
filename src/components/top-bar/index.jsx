@@ -27,6 +27,10 @@ class TopBar extends Component {
 
     return (
       <div id='top-bar'>
+        <div id='google-sign-in' className={ readMode ? 'hidden' : ''}>
+          <div className='g-signin2' data-onsuccess={(user) => onSignIn(user)}></div>
+          <a href='#' onClick={signOut}>Sign out</a>
+        </div>
         <div id='preview-switch' className={ readMode ? 'hidden' : ''}>
           <div className='top-bar-text'>Modo borrador: </div>
           <div className={getClassName(!previewMode)}>Desactivado</div>
@@ -61,5 +65,21 @@ const enhance = compose(
   withQueryParams,
   connect(mapStateToProps, actions)
 );
+
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+
+function signOut() {
+  gapi.auth2.getAuthInstance() // eslint-disable-line no-undef
+    .signOut()
+    .then(function () {
+      console.log('User signed out.');
+  });
+}
 
 export default enhance(TopBar);
