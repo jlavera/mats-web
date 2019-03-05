@@ -61,8 +61,8 @@ export default function(state = initialState, action) {
             );
 
             newFixture[idx] = {
-              ...newFixture[idx].options.find(o => o.code === code),
-              ...newFixture[idx]
+              ...newFixture[idx],
+              ...newFixture[idx].options.find(o => o.code === code)
             };
           });
         });
@@ -99,7 +99,9 @@ export default function(state = initialState, action) {
       };
     }
     case CHANGE_OPTATIVE: {
-      stateStorage.setOptative(action.payload);
+      if (!action.payload.previewMode) {
+        stateStorage.setOptative(action.payload);
+      }
 
       // fill placeholder or change existing
       const newFixture = state.fixture.slice();

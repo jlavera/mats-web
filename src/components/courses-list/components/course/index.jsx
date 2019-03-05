@@ -6,11 +6,11 @@ import ReactTooltip from 'react-tooltip';
 import { compose, flatten, prop, sortBy } from 'ramda';
 import Select from 'react-select';
 
-import * as stateStorage from '../../../../services/stateStorage';
 import { DependenciesHolder, StateSwitch } from './components';
 import { changeOptative } from '../../actions';
 import { withQueryParams } from '../../../utils';
 import { optativesSelector } from '../../selectors';
+import { isPreviewModeEnabledSelector } from '../../../../shared/selectors';
 import './style.css';
 
 const isBlockedToSign = course => {
@@ -59,11 +59,14 @@ const Course = props => {
 
   const handleOptativeChange = selected => {
     selected.value &&
-      props.changeOptative({
-        year,
-        slotIndex,
-        code: selected.value
-      });
+      props.changeOptative(
+        {
+          year,
+          slotIndex,
+          code: selected.value
+        },
+        props.previewMode
+      );
   };
 
   return (
@@ -176,7 +179,8 @@ Course.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  selectedOptatives: optativesSelector(state)
+  selectedOptatives: optativesSelector(state),
+  previewMode: isPreviewModeEnabledSelector(state)
 });
 
 const enhance = compose(

@@ -50,15 +50,13 @@ export const doGetCoursesForCareer = (careerCode, defaultState) => {
 
 export const CHANGE_STATES = 'CHANGE_STATES';
 
-const changeStates = (codesAndStates, previewMode) => {
-  return {
-    type: CHANGE_STATES,
-    payload: {
-      changes: codesAndStates,
-      previewMode
-    }
-  };
-};
+const changeStates = (codesAndStates, previewMode) => ({
+  type: CHANGE_STATES,
+  payload: {
+    changes: codesAndStates,
+    previewMode
+  }
+});
 
 export const doChangeStateCourses = (codesAndStates, previewMode) => {
   return dispatch => {
@@ -78,9 +76,9 @@ export const doChangeStatesFromCookie = previewMode => {
 
 export const CHANGE_OPTATIVE = 'CHANGE_OPTATIVE';
 
-export const changeOptative = optative => ({
+export const changeOptative = (optative, previewMode) => ({
   type: CHANGE_OPTATIVE,
-  payload: optative
+  payload: { ...optative, previewMode }
 });
 
 export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
