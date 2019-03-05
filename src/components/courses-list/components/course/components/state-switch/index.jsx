@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { bool, func, shape, string } from 'prop-types';
 import ReactTooltip from 'react-tooltip';
-import {
-  isPreviewModeEnabledSelector
-} from '../../../../../../shared/selectors';
+import { isPreviewModeEnabledSelector } from '../../../../../../shared/selectors';
 import { withQueryParams } from '../../../../../utils';
 import { compose } from 'ramda';
 
@@ -21,65 +19,85 @@ const isNowState = state => [
   { 'now-pending': isPending(state) }
 ];
 const isSelected = (f, state) => [
-  { 'selected': f(state) },
+  { selected: f(state) },
   { 'non-selected': !f(state) }
 ];
 
-const stateString = state => isApproved(state) ? 'Aprobada' : isSigned(state) ? 'Firmada' : 'Pendiente';
+const stateString = state =>
+  isApproved(state) ? 'Aprobada' : isSigned(state) ? 'Firmada' : 'Pendiente';
 
 const StateSwitch = props => {
   const {
-    course: { 
-      code,
-      state
-    },
+    course: { code, state },
     onChangeState,
     previewMode,
-    readMode
+    readMode,
+    disabled
   } = props;
 
-  const lineClass = classNames([
-    'line'
-  ].concat(isNowState(state)));
+  const lineClass = classNames(['line'].concat(isNowState(state)));
 
-  const pendingClass = classNames([
-    'dot',
-    'pending',
-  ].concat(isSelected(isPending, state), isNowState(state)));
+  const pendingClass = classNames(
+    ['dot', 'pending'].concat(isSelected(isPending, state), isNowState(state))
+  );
 
-  const signedClass = classNames([
-    'dot',
-    'signed'
-  ].concat(isSelected(isSigned, state), isNowState(state)));
+  const signedClass = classNames(
+    ['dot', 'signed'].concat(isSelected(isSigned, state), isNowState(state))
+  );
 
-  const approvedClass = classNames([
-    'dot',
-    'approved'
-  ].concat(isSelected(isApproved, state), isNowState(state)));
+  const approvedClass = classNames(
+    ['dot', 'approved'].concat(isSelected(isApproved, state), isNowState(state))
+  );
 
-  const changeState = newState => onChangeState({[code]: newState}, previewMode);
+  const changeState = newState => {
+    if (!disabled) {
+      onChangeState({ [code]: newState }, previewMode);
+    }
+  };
 
   return (
-    <div className='state-switch-holder'>
-      { readMode ? (
-          <div className={classNames(['status-read-mode', `status-read-mode-${state}`])}>{ stateString(state) }</div>
-        ) : (
-          <div className={lineClass}>
-            <div data-tip data-for='dot-pending' className={pendingClass} onClick={() => changeState('P')} />
-            <ReactTooltip id='dot-pending' type='dark'>
+    <div className="state-switch-holder">
+      {readMode ? (
+        <div
+          className={classNames([
+            'status-read-mode',
+            `status-read-mode-${state}`
+          ])}
+        >
+          {stateString(state)}
+        </div>
+      ) : (
+        <div className={lineClass}>
+          <div
+            data-tip
+            data-for="dot-pending"
+            className={pendingClass}
+            onClick={() => changeState('P')}
+          />
+          <ReactTooltip id="dot-pending" type="dark">
             <span>Pendiente</span>
-            </ReactTooltip>
+          </ReactTooltip>
 
-            <div data-tip data-for='dot-signed' className={signedClass} onClick={() => changeState('S')} />
-            <ReactTooltip id='dot-signed' type='dark'>
+          <div
+            data-tip
+            data-for="dot-signed"
+            className={signedClass}
+            onClick={() => changeState('S')}
+          />
+          <ReactTooltip id="dot-signed" type="dark">
             <span>Firmada</span>
-            </ReactTooltip>
+          </ReactTooltip>
 
-            <div data-tip data-for='dot-approved' className={approvedClass} onClick={() => changeState('A')} />
-            <ReactTooltip id='dot-approved' type='dark'>
+          <div
+            data-tip
+            data-for="dot-approved"
+            className={approvedClass}
+            onClick={() => changeState('A')}
+          />
+          <ReactTooltip id="dot-approved" type="dark">
             <span>Aprobada</span>
-            </ReactTooltip>
-          </div>
+          </ReactTooltip>
+        </div>
       )}
     </div>
   );
@@ -88,12 +106,13 @@ const StateSwitch = props => {
 StateSwitch.defaultProps = {
   course: {
     state: 'P'
-  }
+  },
+  disabled: false
 };
 
 StateSwitch.propTypes = {
   course: shape({
-    code: string.isRequired,
+    code: string,
     state: string
   }),
   previewMode: bool.isRequired,
@@ -106,7 +125,10 @@ const mapStateToProps = state => ({
 
 const enhance = compose(
   withQueryParams,
-  connect(mapStateToProps, {})
+  connect(
+    mapStateToProps,
+    {}
+  )
 );
 
 export default enhance(StateSwitch);
