@@ -10,9 +10,7 @@ import { Year } from './components';
 import { formatWithStatusFromCommaSeparatedString } from './utils';
 import { isFetchingCoursesSelector, sortedCoursesByYearSelector } from './selectors';
 import { selectedCareerSelector } from '../careers-list/selectors';
-import {
-  isPreviewModeEnabledSelector
-} from '../../shared/selectors';
+
 import './style.css';
 
 class CoursesList extends Component {
